@@ -1,9 +1,9 @@
-import express, {Express} from 'express';
+import express, {Application} from 'express';
 import morgan from 'morgan';
 import userRoutes from './routes/user/user.routes';
 
 
-const app:Express = express();
+const app:Application = express();
 
 app.use(express.json());
 app.use(morgan('dev'));
