@@ -27,12 +27,13 @@ export const deleteUser = (req:Request, res:Response) => {
 
 export const signUp = async(req:Request, res:Response):Promise<Response> => {
 
+    
     if(!req.body.email || !req.body.password){
         return res.status(400).json({msg:"Please, check your email and password"})
     }
 
     const user = await User.findOne({email:req.body.email})
-
+    console.log(user);
     if(user){
         return res.status(400).json({
             msg:"The user already exists"
