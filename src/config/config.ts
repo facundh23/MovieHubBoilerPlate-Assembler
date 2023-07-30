@@ -5,13 +5,19 @@ type TConfig = {
 };
 
 type EnviromentConfig = {
-    app:AppConfig
+    app:AppConfig,
+    DB: DbConfig
 };
 
 type AppConfig = {
     PORT: string | number
 };
-
+type DbConfig =  {
+    DB?: string 
+    URI: string 
+    USER?: string 
+    PASSWORD?: string
+}
 if(process.env.NODE_ENV === 'production'){
     dotenv.config({path:".env.production"})
 } else {
@@ -23,14 +29,25 @@ const ENV = process.env.NODE_ENV ?? "development"
 const CONFIG: TConfig = {
     development: {
         app: {
-            PORT: process.env.PORT || 3000
+            PORT: process.env.PORT || 3000,
         },
+        DB: {
+                URI: process.env.MONGO_URI || 'mongodb://localhost/jwttutorial' ,
+                USER: process.env.MONGO_USER,
+                PASSWORD:process.env.MONGO_PASSWORD
+        }
     },
     production:{
         app: {
             PORT: process.env.PORT || 4001
-        }
+        },
+        DB: {
+            URI: process.env.MONGO_URI || 'mongodb://localhost/jwttutorial' ,
+            USER: process.env.MONGO_USER,
+            PASSWORD:process.env.MONGO_PASSWORD
     }
+    },
+  
 }
 
 export default CONFIG[ENV];
