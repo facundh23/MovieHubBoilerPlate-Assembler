@@ -6,14 +6,12 @@ export interface UserInterface extends Document{
     name:string,
     email:string,
     password:string,
-    movies: object[]
+    createdAt: Date,
+    updatedAt: Date,
+    movies: string[]
 }
 
 const userSchema = new Schema({
-    id:{
-        type: String, 
-        unique:true
-    },
     name:{
         type:String,
         required:true,
@@ -21,15 +19,20 @@ const userSchema = new Schema({
     email:{
         type:String,
         unique:true,
-        required:true,
+        required:[true, 'This field is Required ❌'],
         lowercase:true,
         trim:true
     },
     password:{
         type:String,
-        required:true,
+        required:[true, 'This field is Required ❌'],
     },
-    movies:[],
+    movies:{
+        type: [{type: Schema.Types.ObjectId, ref: 'Movies'}]
+    },
+}, {
+    timestamps: true,
+    versionKey: false
 })
 
 userSchema.pre<UserInterface>('save', async function(next) {

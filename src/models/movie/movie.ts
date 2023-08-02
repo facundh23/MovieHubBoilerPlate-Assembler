@@ -1,18 +1,14 @@
 import {model, Schema, Document} from 'mongoose';
 
 export interface MovieInterface extends Document {
-    id:string,
+   
     name:string,
     poster_image: string,
     score:number,
-    genre:string[]
+    genre?:string[]
 }
 
 const movieSchema = new Schema({
-    id:{
-        type:String,
-        unique:true,
-    },
     name:{
         type:String,
         unique:true,
@@ -25,8 +21,10 @@ const movieSchema = new Schema({
         type:Number,
     },
     genre:{
-        type:[],
+        type:[{type: Schema.Types.ObjectId, ref:'Genres'}],
     }
+}, {
+    timestamps:true, versionKey:false
 })
 
-export default model<MovieInterface>('Movie', movieSchema);
+export default model<MovieInterface>('Movies', movieSchema);

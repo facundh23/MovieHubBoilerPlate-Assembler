@@ -4,6 +4,7 @@ import userRoutes from './routes/user/user.routes';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import authRoutes from './routes/auth/auth.routes'
+import moviesRoutes from './routes/movies/movies.routes'
 
 const app:Application = express();
 
@@ -15,7 +16,9 @@ app.use(cors());
 app.use(express.urlencoded({extended:false}))
 app.use(express.json());
 
-app.use("/user", userRoutes)
 app.use("/",authRoutes)
+app.use("/users", userRoutes)
+app.use("/movies", moviesRoutes)
+
 
 export default app;

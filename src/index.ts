@@ -1,6 +1,6 @@
 import config from './config/config';
 import app from './server';
-import './database';
+import './db/database';
 
 const PORT: string | number = config.app.PORT
 

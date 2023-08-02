@@ -32,7 +32,7 @@ const CONFIG: TConfig = {
             PORT: process.env.PORT || 3000,
         },
         DB: {
-                URI: process.env.MONGO_URI || 'mongodb://localhost/jwttutorial' ,
+                URI: process.env.MONGODB_URI || '' ,
                 USER: process.env.MONGO_USER,
                 PASSWORD:process.env.MONGO_PASSWORD
         }
@@ -42,7 +42,7 @@ const CONFIG: TConfig = {
             PORT: process.env.PORT || 4001
         },
         DB: {
-            URI: process.env.MONGO_URI || 'mongodb://localhost/jwttutorial' ,
+            URI: process.env.MONGODB_URI || '' ,
             USER: process.env.MONGO_USER,
             PASSWORD:process.env.MONGO_PASSWORD
     }

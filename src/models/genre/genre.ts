@@ -1,20 +1,15 @@
 import {model, Schema, Document} from 'mongoose';
 
-export interface GenreInterface {
-    id:string, 
+export interface GenreInterface extends Document {
+    id:string,
     name:string
 }
 
 const genreSchema = new Schema({
-    id:{
-        type:String,
-        unique:true
-    },
     name:{
         type:String,
-        trim:true,
-
+        maxLength: [7, 'Maximun is Seven']
     }
 });
 
-export default model<GenreInterface>('Genre', genreSchema);
+export default model<GenreInterface>('Genres', genreSchema);
