@@ -43,7 +43,7 @@ export const updateUser = async (req:Request, res:Response):Promise<Response> =>
     const { name, email } = req.body;
 
     try {
-        const updatedUser = await User.findByIdAndUpdate({_id:userId}, {$ser:{name:name, email:email}}, {new:true})
+        const updatedUser = await User.findByIdAndUpdate({_id:userId}, { $set: {name:name, email:email}}, {new:true})
         return res.status(200).send(updatedUser);
     } catch (error) {
         return res.status(500).json(error)

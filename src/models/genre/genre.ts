@@ -8,7 +8,7 @@ export interface GenreInterface extends Document {
 const genreSchema = new Schema({
     name:{
         type:String,
-        maxLength: [7, 'Maximun is Seven']
+        maxLength: [10, 'Maximun is Seven']
     }
 });
 

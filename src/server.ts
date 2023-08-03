@@ -5,6 +5,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import authRoutes from './routes/auth/auth.routes'
 import moviesRoutes from './routes/movies/movies.routes'
+import genreRoutes from './routes/genre/genre.routes'
 
 const app:Application = express();
 
@@ -19,6 +20,7 @@ app.use(express.json());
 app.use("/",authRoutes)
 app.use("/users", userRoutes)
 app.use("/movies", moviesRoutes)
+app.use("/genres", genreRoutes)
 
 
 export default app;

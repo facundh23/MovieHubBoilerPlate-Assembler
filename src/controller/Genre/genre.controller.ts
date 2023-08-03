@@ -1,30 +1,50 @@
 import { Request, Response } from "express";
-import Genres from "../../models/genre/genre";
+import User from "../../models/user/user";
 import Movies from "../../models/movie/movie";
+import Genres from "../../models/genre/genre";
 
 export const addGenre = async (req:Request, res:Response):Promise<Response>=> {
-    const { name, poster_image, score } = req.body;
-    const {userId} = req.params;
+    const {movieId} = req.params;
+    if(!req.body.name){
+        return res.status(400).json({msg:"This field is required"})
+    }
 
-    
-    try {
-        const newMovie = Movies.create({
-            name, poster_image, score
+    const genre = await Genres.findOne({name: req.body.name})
+    if(genre){
+        return res.status(400).json({
+            msg:"The genre already exist"
         })
+    }
 
-        await User.findByIdAndUpdate({_id: userId}, {
-            $push: {movies: (await newMovie)._id}
+    try {
+        const newGenre = new Genres(req.body)
+
+        await Movies.findByIdAndUpdate({_id: movieId}, {
+            $push: {genres: ( newGenre)._id}
         },)
-        return res.status(201).send(newMovie)
+        await newGenre.save();
+
+        return res.status(201).send(newGenre)
     } catch (error) {
         return res.status(500).send(error)
     }
 }
 
-export const deleteMovieById = async (req:Request, res:Response):Promise<Response> =>{
-    const {Id} = req.params;
+export const showGenres = async(req:Request, res: Response):Promise<Response> => {
     try {
-        return res.status(200).send({msg:"Movie deleted", data: Id})
+        const allGenres = await Genres.find()
+        return res.status(200).json(allGenres);
+    } catch (error) {
+        return res.status(500).json(error);
+    }
+}
+
+export const deleteGenreById = async (req:Request, res:Response):Promise<Response> =>{
+    const {genreId} = req.params;
+    
+    try {
+        await Genres.findByIdAndDelete(({_id:genreId}))
+        return res.status(200).send({msg:"Genre deleted", data: genreId})
     } catch (error) {
         return res.status(500).send(error)
     }

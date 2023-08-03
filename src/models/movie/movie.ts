@@ -1,10 +1,10 @@
 import {model, Schema, Document} from 'mongoose';
 
 export interface MovieInterface extends Document {
-   
     name:string,
     poster_image: string,
     score:number,
+    year: number,
     genre?:string[]
 }
 
@@ -20,9 +20,17 @@ const movieSchema = new Schema({
     score:{
         type:Number,
     },
-    genre:{
-        type:[{type: Schema.Types.ObjectId, ref:'Genres'}],
-    }
+    year:{
+        type:Number,
+    },
+    genres:[
+        {
+            genre: {
+                type:Schema.Types.ObjectId, 
+                ref:'Genres'
+            }
+        }
+    ]
 }, {
     timestamps:true, versionKey:false
 })
