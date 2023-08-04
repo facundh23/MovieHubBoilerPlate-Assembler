@@ -41,8 +41,8 @@ export const createMovie = async (req:Request, res:Response):Promise<Response>=>
         },)
 
         await newMovie.save();
-        res.json(newMovie)
-        return res.status(201).send(newMovie)
+       
+        return res.status(201).json(newMovie)
     } catch (error) {
         return res.status(500).send(error)
     }
