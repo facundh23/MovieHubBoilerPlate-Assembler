@@ -1,8 +1,9 @@
+import { UploadedFile } from 'express-fileupload';
 import {model, Schema, Document} from 'mongoose';
 
 export interface MovieInterface extends Document {
     name:string,
-    poster_image: string,
+    poster_image: any,
     score:number,
     year: number,
     genre?:string[]
@@ -14,8 +15,8 @@ const movieSchema = new Schema({
         unique:true,
     },
     poster_image:{
-        type:String, 
-        unique:true,
+        public_id: String,
+        secure_url:String,
     },
     score:{
         type:Number,

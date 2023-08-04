@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import authRoutes from './routes/auth/auth.routes'
 import moviesRoutes from './routes/movies/movies.routes'
 import genreRoutes from './routes/genre/genre.routes'
+import fileUpload from 'express-fileupload';
 
 const app:Application = express();
 
@@ -16,6 +17,10 @@ dotenv.config()
 app.use(cors());
 app.use(express.urlencoded({extended:false}))
 app.use(express.json());
+app.use(fileUpload ({
+    useTempFiles:true,
+    tempFileDir: './uploads'
+}))
 
 app.use("/",authRoutes)
 app.use("/users", userRoutes)

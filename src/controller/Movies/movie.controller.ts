@@ -1,21 +1,47 @@
 import { Request, Response } from "express";
 import User from "../../models/user/user";
 import Movies from "../../models/movie/movie";
-import Genres from "../../models/genre/genre";
+import { uploadImage } from "../../utils/cloudinary";
+import fs from 'fs-extra';
+
+
+
 
 export const createMovie = async (req:Request, res:Response):Promise<Response>=> {
-    const { name, poster_image, score, genres , year} = req.body;
-    const {userId} = req.params;
-
+    
     
     try {
-        const newMovie = Movies.create({
-            name, poster_image, score, genres, year
+        const { name, poster_image, score, genres , year} = req.body;
+
+       
+        const {userId} = req.params;
+
+        const newMovie = new Movies({
+            name, score, genres, year
         })
+
+        const image = req.files?.poster_image
+
+        if(image){
+            if("tempFilePath" in image){
+               const result = await uploadImage(image.tempFilePath)
+               newMovie.poster_image = {
+                public_id: result.public_id,
+                secure_url: result.secure_url
+               }
+               await fs.unlink(image.tempFilePath)
+            }
+        }
+
+       
+        
 
         await User.findByIdAndUpdate({_id: userId}, {
             $push: {movies: (await newMovie)._id}
         },)
+
+        await newMovie.save();
+        res.json(newMovie)
         return res.status(201).send(newMovie)
     } catch (error) {
         return res.status(500).send(error)
