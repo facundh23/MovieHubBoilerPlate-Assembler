@@ -1,4 +1,4 @@
-import { UploadedFile } from 'express-fileupload';
+
 import {model, Schema, Document} from 'mongoose';
 
 export interface MovieInterface extends Document {
@@ -24,7 +24,7 @@ const movieSchema = new Schema({
     year:{
         type:Number,
     },
-    genres:[
+    genre:[
         {
             genre: {
                 type:Schema.Types.ObjectId, 

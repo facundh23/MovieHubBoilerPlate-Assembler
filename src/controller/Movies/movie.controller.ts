@@ -8,16 +8,15 @@ import fs from 'fs-extra';
 
 
 export const createMovie = async (req:Request, res:Response):Promise<Response>=> {
-    
-    
+
     try {
-        const { name, poster_image, score, genres , year} = req.body;
+        const { name, score, genre , year} = req.body;
 
        
         const {userId} = req.params;
 
         const newMovie = new Movies({
-            name, score, genres, year
+            name, score, genre, year
         })
 
         const image = req.files?.poster_image
@@ -33,7 +32,7 @@ export const createMovie = async (req:Request, res:Response):Promise<Response>=>
             }
         }
 
-       
+      
         
 
         await User.findByIdAndUpdate({_id: userId}, {
@@ -60,7 +59,7 @@ export const getAllMovies = async (req:Request, res:Response):Promise<Response>=
 export const getMovieById = async (req:Request, res:Response):Promise<Response> => {
     const {movieId} = req.params;
     try {
-        const genreMovie = await Movies.findById({_id: movieId}).populate('genres').populate({path: 'genres.genre', model:'Genres'});
+        const genreMovie = await Movies.findById({_id: movieId}).populate('genres').populate({path: 'genre.genre', model:'Genres'});
         return res.status(201).json(genreMovie);
     } catch (error) {
         return res.status(500).json(error)
@@ -69,10 +68,10 @@ export const getMovieById = async (req:Request, res:Response):Promise<Response> 
 
 export const updateMovie = async (req:Request, res:Response):Promise<Response> => {
     const {movieId} = req.params;
-    const { name, poster_image, year, score, genres } = req.body;
+    const { name, poster_image, year, score, genre } = req.body;
 
     try {
-        const updatedMovie = await Movies.findByIdAndUpdate({_id:movieId}, {$set :{name:name, poster_image:poster_image, score:score, year:year, genres:genres}}, {new:true})
+        const updatedMovie = await Movies.findByIdAndUpdate({_id:movieId}, {$set :{name:name, poster_image:poster_image, score:score, year:year, genre:genre}}, {new:true})
         return res.status(200).send(updatedMovie);
     } catch (error) {
         return res.status(500).json(error)

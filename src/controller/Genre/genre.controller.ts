@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import User from "../../models/user/user";
 import Movies from "../../models/movie/movie";
 import Genres from "../../models/genre/genre";
 
@@ -20,7 +19,7 @@ export const addGenre = async (req:Request, res:Response):Promise<Response>=> {
         const newGenre = new Genres(req.body)
 
         await Movies.findByIdAndUpdate({_id: movieId}, {
-            $push: {genres: ( newGenre)._id}
+            $push: {genre: ( newGenre)._id}
         },)
         await newGenre.save();
 
