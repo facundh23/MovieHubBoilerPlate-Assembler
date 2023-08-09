@@ -5,6 +5,7 @@ const userRoutes:Router = Router();
 
 userRoutes
     .get("/",getAllUsers)
+   
     .get("/:userId", getUserById)
     .put("/:userId", updateUser)
     .delete("/:userId", deleteUser)

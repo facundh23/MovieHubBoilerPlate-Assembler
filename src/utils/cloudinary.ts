@@ -12,7 +12,7 @@ cloudinary.config({
 export async function uploadImage (imagePath: string){
     return await cloudinary.uploader.upload(imagePath, {
         folder:'movieImage',
-      
+        width:400, height:300, crop:"fill"
     })
    
 }

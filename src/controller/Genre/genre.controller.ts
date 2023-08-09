@@ -1,50 +1,58 @@
 import { Request, Response } from "express";
-import Movies from "../../models/movie/movie";
-import Genres from "../../models/genre/genre";
+import prisma from "../../db/clientPrisma";
 
 export const addGenre = async (req:Request, res:Response):Promise<Response>=> {
-    const {movieId} = req.params;
+    const {name} = req.body
+    
     if(!req.body.name){
         return res.status(400).json({msg:"This field is required"})
     }
 
-    const genre = await Genres.findOne({name: req.body.name})
-    if(genre){
-        return res.status(400).json({
-            msg:"The genre already exist"
+    try {
+        
+        const genre = await prisma.genres.create({
+            data: {
+                name,
+            },
         })
-    }
+            return res.status(201).send(genre)
+        } catch (error) {
+            return res.status(500).send(error)
+        }
+}
+
+export const generatorGenre = async (req:Request, res:Response):Promise<Response>=> {
+    const { name } = req.body;
 
     try {
-        const newGenre = new Genres(req.body)
-
-        await Movies.findByIdAndUpdate({_id: movieId}, {
-            $push: {genre: ( newGenre)._id}
-        },)
-        await newGenre.save();
-
-        return res.status(201).send(newGenre)
+        const genre = await prisma.genres.create({
+            data: {
+                name,
+            },
+        })
+        return res.status(201).json(genre);
     } catch (error) {
-        return res.status(500).send(error)
+        return res.status(500).json(error)
     }
 }
 
+
 export const showGenres = async(req:Request, res: Response):Promise<Response> => {
     try {
-        const allGenres = await Genres.find()
+        const allGenres = await prisma.genres.findMany()
         return res.status(200).json(allGenres);
     } catch (error) {
         return res.status(500).json(error);
     }
-}
+ }
 
 export const deleteGenreById = async (req:Request, res:Response):Promise<Response> =>{
     const {genreId} = req.params;
     
-    try {
-        await Genres.findByIdAndDelete(({_id:genreId}))
+   try {
+         await prisma.genres.delete({where:{id:genreId}})
         return res.status(200).send({msg:"Genre deleted", data: genreId})
     } catch (error) {
         return res.status(500).send(error)
     }
-}
+ }
