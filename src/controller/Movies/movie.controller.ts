@@ -4,11 +4,6 @@ import prisma from "../../db/clientPrisma";
 import { uploadImage } from "../../utils/cloudinary";
 import fs from 'fs-extra'
 
-
-
-
-
-
 export const newMovie = async (req: Request, res: Response): Promise<Response> => {
     const { title,  genres } = req.body;
     const { userId } = req.params;
@@ -42,7 +37,7 @@ export const newMovie = async (req: Request, res: Response): Promise<Response> =
                 } catch (error) {
                     return res.status(500).json({error: 'Upload error'})
                 }
-                }
+            }
             }
         const newMovie = await prisma.movies.create({
             data: {
@@ -121,9 +116,12 @@ export const updateMovie = async (req:Request, res:Response):Promise<Response> =
     const { title } = req.body;
 
     try {
-        const updatedMovie = await prisma.movies.findUnique({
+        const updatedMovie = await prisma.movies.update({
             where:{
                 id:movieId
+            },
+            data:{
+                title,
             }
         })
         return res.status(200).send(updatedMovie);
