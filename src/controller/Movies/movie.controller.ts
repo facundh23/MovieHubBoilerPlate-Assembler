@@ -13,6 +13,8 @@ export const newMovie = async (req: Request, res: Response): Promise<Response> =
     const { title,  genres } = req.body;
     const { userId } = req.params;
 
+    let secure_url_image = '';
+    let public_id_image = '';
     let {year} = req.body;
     if(typeof year === 'string'){
         year = parseInt(year)
@@ -23,20 +25,34 @@ export const newMovie = async (req: Request, res: Response): Promise<Response> =
         score = parseInt(score)
     }
      
+    if(!req.files || !req.files.poster_image){
+        return res.status(400).send('Image is required');
+    }
 
-   
-        console.log(req.files?.poster_image)
     try {
         const image = req.files?.poster_image
         if(image){
             if("tempFilePath" in image){
+                try {
                     const poster_image = await uploadImage(image.tempFilePath)
-                    await fs.unlink(image.tempFilePath)
+                    secure_url_image = poster_image.secure_url;
+                    public_id_image = poster_image.public_id;
+                    await fs.unlink(image?.tempFilePath)
+                    
+                } catch (error) {
+                    return res.status(500).json({error: 'Upload error'})
+                }
                 }
             }
         const newMovie = await prisma.movies.create({
             data: {
                 title,
+                poster_image:{
+                    create:{
+                        public_id: public_id_image,
+                        secure_url: secure_url_image,
+                    }
+                },
                 year,
                 genres: {
                     connect:genres.map((genre:string) => ({id:genre}))
@@ -47,12 +63,15 @@ export const newMovie = async (req: Request, res: Response): Promise<Response> =
                         id: userId
                     }
                 },
-                
+
             },
             include: {
                 genres: {
                     select:{name:true}
                 },
+                poster_image:{
+                    select:{secure_url:true}
+                }
             }
         });
         

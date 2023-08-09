@@ -21,17 +21,17 @@ model User {
 }
 
 model Movies {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  title     String?
-  year      Int?
-  score     Int?
-  // poster_image Image?   @relation(fields: [imageId], references: [id])
-  genres    Genres[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  User      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    String?  @db.ObjectId
-  // imageId   String   @db.ObjectId
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  title        String?
+  year         Int?
+  score        Int?
+  poster_image Image    @relation(fields: [imageId], references: [id])
+  genres       Genres[]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  User         User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       String?  @db.ObjectId
+  imageId      String   @db.ObjectId
 }
 
 model Genres {
@@ -43,9 +43,9 @@ model Genres {
   moviesId  String?  @db.ObjectId
 }
 
-// model Image {
-//   id         String   @id @default(auto()) @map("_id") @db.ObjectId
-//   public_id  String   @db.ObjectId
-//   secure_url String
-//   Movies     Movies[]
-// }
+model Image {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  public_id  String
+  secure_url String
+  Movies     Movies[]
+}
