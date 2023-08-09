@@ -10,23 +10,30 @@ import fs from 'fs-extra'
 
 
 export const newMovie = async (req: Request, res: Response): Promise<Response> => {
-    const { title,  genres,score , year } = req.body;
+    const { title,  genres } = req.body;
     const { userId } = req.params;
 
-    // let {year} = req.body;
-    // if(typeof year === 'string'){
-    //     year = parseInt(year)
-    // }
+    let {year} = req.body;
+    if(typeof year === 'string'){
+        year = parseInt(year)
+    }
 
-    // let {score} = req.body;
-    // if( typeof score === 'string'){
-    //     score = parseInt(score)
-    // }
+    let {score} = req.body;
+    if( typeof score === 'string'){
+        score = parseInt(score)
+    }
      
 
    
         console.log(req.files?.poster_image)
     try {
+        const image = req.files?.poster_image
+        if(image){
+            if("tempFilePath" in image){
+                    const poster_image = await uploadImage(image.tempFilePath)
+                    await fs.unlink(image.tempFilePath)
+                }
+            }
         const newMovie = await prisma.movies.create({
             data: {
                 title,
@@ -49,13 +56,7 @@ export const newMovie = async (req: Request, res: Response): Promise<Response> =
             }
         });
         
-        // const image = req.files?.poster_image
-        // if(image){
-        //     if("tempFilePath" in image){
-        //             await uploadImage(image.tempFilePath)
-        //             await fs.unlink(image.tempFilePath)
-        //         }
-        //     }
+       
           return res.status(201).send(newMovie);
     } catch (error) {
         console.log(error)
