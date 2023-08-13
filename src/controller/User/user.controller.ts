@@ -1,7 +1,7 @@
 import { Response, Request } from 'express';
 import prisma from '../../db/clientPrisma';
-import { encryptPassword } from '../../utils/bcrypt';
-import bcrypt from 'bcrypt';
+// import { encryptPassword } from '../../utils/bcrypt';
+// import bcrypt from 'bcrypt';
 
 
 export const signUp = async (req: Request, res: Response): Promise<void> => {
@@ -19,13 +19,11 @@ export const signUp = async (req: Request, res: Response): Promise<void> => {
             data: {
                 name,
                 email,
-                password: await encryptPassword(password)
+                password
             }
         })
 
-        
-
-        res.status(200).json(newUser);
+         res.status(200).json(newUser);
 
     } catch (error) {
         console.log(error)
