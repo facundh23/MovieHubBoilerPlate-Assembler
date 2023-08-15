@@ -28,8 +28,8 @@ app.use(
 );
 
 app.use("/", authRoutes);
-app.use("/users", checkJwtMiddleware, userRoutes);
-app.use("/home", checkJwtMiddleware, moviesRoutes);
+app.use("/users", userRoutes);
+app.use("/home", moviesRoutes);
 app.use("/genres", checkJwtMiddleware, genreRoutes);
 
 export default app;

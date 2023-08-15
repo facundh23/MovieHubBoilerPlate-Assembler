@@ -8,14 +8,13 @@ import {
   publicMovies,
 } from "../../controller/movies/movie.controller";
 import { checkJwtMiddleware } from "../../middlewares/checkJwtmiddleware";
-import { protectedRequest } from "../../controller/request/request.controller";
 
 const moviesRoutes: Router = Router();
 
 moviesRoutes
   .get("/public", publicMovies)
-  .get("/", checkJwtMiddleware, getAllMovies)
-  .get("/protected", checkJwtMiddleware, protectedRequest)
+  .get("/movies", checkJwtMiddleware, getAllMovies)
+  .get("/protected", checkJwtMiddleware, getMovieById)
   .post("/:userId", checkJwtMiddleware, newMovie)
   .delete("/:movieId", checkJwtMiddleware, deleteMovieById)
   .put("/:movieId", checkJwtMiddleware, updateMovie);
