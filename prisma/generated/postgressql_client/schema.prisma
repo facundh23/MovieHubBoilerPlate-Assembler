@@ -1,0 +1,52 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+    output   = "./generated/postgressql_client"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model User {
+    id        Int      @id @default(autoincrement())
+    name      String?
+    email     String   @unique
+    password  String
+    movies    Movies[]
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model Movies {
+    id           Int      @id @default(autoincrement())
+    title        String?
+    year         Int?
+    score        Int?
+    poster_image Image    @relation(fields: [imageId], references: [id])
+    genres       Genres[]
+    createdAt    DateTime @default(now())
+    updatedAt    DateTime @updatedAt
+    User         User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId       Int?
+    imageId      Int
+}
+
+model Genres {
+    id        Int      @id @default(autoincrement())
+    name      String   @unique
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    Movies    Movies[]
+    moviesId  Int?
+}
+
+model Image {
+    id         Int      @id @default(autoincrement())
+    public_id  String
+    secure_url String
+    Movies     Movies[]
+}

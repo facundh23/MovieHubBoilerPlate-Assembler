@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
 
-import prisma from "../../db/clientPrisma";
+import { prismaClient } from "../../db/clientPrisma";
 import { uploadImage } from "../../utils/cloudinary";
 import fs from "fs-extra";
+import { convertType } from "../../utils/convertData";
 
 export const newMovie = async (
   req: Request,
@@ -41,7 +42,7 @@ export const newMovie = async (
         }
       }
     }
-    const newMovie = await prisma.movies.create({
+    const newMovie = await prismaClient.movies.create({
       data: {
         title,
         poster_image: {
@@ -83,7 +84,7 @@ export const getAllMovies = async (
   res: Response
 ): Promise<Response> => {
   try {
-    const allMovies = await prisma.movies.findMany({
+    const allMovies = await prismaClient.movies.findMany({
       include: {
         genres: true,
         User: true,
@@ -101,9 +102,9 @@ export const getMovieById = async (
 ): Promise<Response> => {
   const { movieId } = req.params;
   try {
-    const genreMovie = await prisma.movies.findUnique({
+    const genreMovie = await prismaClient.movies.findUnique({
       where: {
-        id: movieId,
+        id: convertType(movieId),
       },
       include: {
         genres: true,
@@ -123,9 +124,9 @@ export const updateMovie = async (
   const { title } = req.body;
 
   try {
-    const updatedMovie = await prisma.movies.update({
+    const updatedMovie = await prismaClient.movies.update({
       where: {
-        id: movieId,
+        id: convertType(movieId),
       },
       data: {
         title,
@@ -144,9 +145,9 @@ export const deleteMovieById = async (
   const { movieId } = req.params;
 
   try {
-    await prisma.movies.delete({
+    await prismaClient.movies.delete({
       where: {
-        id: movieId,
+        id: convertType(movieId),
       },
     });
     return res
