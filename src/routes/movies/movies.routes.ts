@@ -15,7 +15,7 @@ moviesRoutes
   .get("/public", publicMovies)
   .get("/", checkJwtMiddleware, getAllMovies)
 
-  .post("/:userId", checkJwtMiddleware, newMovie)
+  .post("/", checkJwtMiddleware, newMovie)
   .delete("/:movieId", checkJwtMiddleware, deleteMovieById)
   .put("/:movieId", checkJwtMiddleware, updateMovie);
 

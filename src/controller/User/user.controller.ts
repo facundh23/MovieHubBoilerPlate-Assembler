@@ -1,30 +1,38 @@
 import { Response, Request } from "express";
 import { prismaClient } from "../../db/clientPrisma";
-// import { encryptPassword } from '../../utils/bcrypt';
-// import bcrypt from 'bcrypt';
 import { convertType } from "../../utils/convertData";
 
 export const signUp = async (req: Request, res: Response): Promise<void> => {
-  const { name, email, password } = req.body;
+  const { name, email } = req.body;
+
+  const existingEmail = await prismaClient.user.findUnique({
+    where: { email: email },
+  });
 
   try {
-    if (!name || !email || !password) {
+    if (!name || !email) {
       res.status(400).json({ error: "Missing required fields" });
       return;
     }
 
-    const newUser = await prismaClient.user.create({
-      data: {
-        name,
-        email,
-        password,
-      },
-    });
+    if (existingEmail) {
+      res.status(200).json({ msg: "Email already exists" });
+      return;
+    }
 
-    res.status(200).json(newUser);
+    if (!existingEmail) {
+      const newUser = await prismaClient.user.create({
+        data: {
+          name: name,
+          email: email,
+        },
+      });
+
+      res.status(200).json(newUser);
+    }
   } catch (error) {
     console.log(error);
-    res.status(500).json(error);
+    res.status(500).json({ msg: error });
   }
 };
 

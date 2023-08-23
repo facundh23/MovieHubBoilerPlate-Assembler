@@ -17,8 +17,8 @@ export const postgresClient: ClientPostgres = new PostgresClient();
 
 export let prismaClient: any;
 
-if (DATA_SOURCE === "postgres") {
-  prismaClient = postgresClient;
-} else {
+if (DATA_SOURCE === "mongodb") {
   prismaClient = mongoClient;
+} else {
+  prismaClient = postgresClient;
 }
