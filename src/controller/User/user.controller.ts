@@ -63,7 +63,7 @@ export const getUserById = async (
   try {
     const user = await prismaClient.user.findUnique({
       where: {
-        id: convertType(userId),
+        email: userId,
       },
       include: {
         movies: {
@@ -75,9 +75,9 @@ export const getUserById = async (
         },
       },
     });
-    return res.status(201).json(user);
+    return res.status(201).send(user);
   } catch (error) {
-    return res.status(500).json(error);
+    return res.status(500).send(error);
   }
 };
 
@@ -91,7 +91,7 @@ export const updateUser = async (
   try {
     const updatedUser = await prismaClient.user.update({
       where: {
-        id: convertType(userId),
+        id: userId,
       },
       data: {
         name,

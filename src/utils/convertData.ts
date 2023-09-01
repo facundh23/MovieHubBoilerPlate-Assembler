@@ -6,3 +6,9 @@ export const convertType = (id: string) => {
     return id;
   }
 };
+
+export const convertVariableType = (value: any) => {
+  if (typeof value === "string") {
+    return (value = parseInt(value));
+  }
+};

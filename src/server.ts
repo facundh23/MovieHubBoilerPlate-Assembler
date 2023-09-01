@@ -7,7 +7,6 @@ import authRoutes from "./routes/auth/auth.routes";
 import moviesRoutes from "./routes/movies/movies.routes";
 import genreRoutes from "./routes/genre/genre.routes";
 import fileUpload from "express-fileupload";
-import { checkJwtMiddleware } from "./middlewares/checkJwtmiddleware";
 
 const app: Application = express();
 
@@ -24,12 +23,13 @@ app.use(
   fileUpload({
     useTempFiles: true,
     tempFileDir: "./uploads",
+    abortOnLimit: true,
   })
 );
 
 app.use("/", authRoutes);
 app.use("/users", userRoutes);
-app.use("/home", checkJwtMiddleware, moviesRoutes);
+app.use("/home", moviesRoutes);
 app.use("/genres", genreRoutes);
 
 export default app;

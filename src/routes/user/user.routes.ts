@@ -12,9 +12,9 @@ const userRoutes: Router = Router();
 
 userRoutes
   .get("/", getAllUsers)
-  .get("/:userId", checkJwtMiddleware, getUserById)
+  .get("/:userId", getUserById)
   .put("/:userId", checkJwtMiddleware, updateUser)
-  .delete("/:userId", deleteUser)
+  .delete("/:userId", checkJwtMiddleware, deleteUser)
   .post("/", signUp);
 
 export default userRoutes;

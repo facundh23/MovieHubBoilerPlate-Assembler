@@ -21,17 +21,18 @@ model User {
 }
 
 model Movies {
-    id           Int      @id @default(autoincrement())
-    title        String?
-    year         Int?
-    score        Int?
-    poster_image Image    @relation(fields: [imageId], references: [id])
-    genres       Genres[]
-    createdAt    DateTime @default(now())
-    updatedAt    DateTime @updatedAt
-    User         User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
-    userId       Int?
-    imageId      Int
+    id              Int      @id @default(autoincrement())
+    title           String?
+    year            Int?
+    score           Int?
+    poster_image    String
+    poster_image_id String
+    genres          Genres[]
+    createdAt       DateTime @default(now())
+    updatedAt       DateTime @updatedAt
+    User            User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId          Int?
+    imageId         Int
 }
 
 model Genres {
@@ -41,11 +42,4 @@ model Genres {
     updatedAt DateTime @updatedAt
     Movies    Movies[]
     moviesId  Int?
-}
-
-model Image {
-    id         Int      @id @default(autoincrement())
-    public_id  String
-    secure_url String
-    Movies     Movies[]
 }

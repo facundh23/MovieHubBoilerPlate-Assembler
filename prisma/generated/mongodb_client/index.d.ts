@@ -28,11 +28,6 @@ export type Movies = $Result.DefaultSelection<Prisma.$MoviesPayload>
  * 
  */
 export type Genres = $Result.DefaultSelection<Prisma.$GenresPayload>
-/**
- * Model Image
- * 
- */
-export type Image = $Result.DefaultSelection<Prisma.$ImagePayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -153,16 +148,6 @@ export class PrismaClient<
     * ```
     */
   get genres(): Prisma.GenresDelegate<ExtArgs>;
-
-  /**
-   * `prisma.image`: Exposes CRUD operations for the **Image** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Images
-    * const images = await prisma.image.findMany()
-    * ```
-    */
-  get image(): Prisma.ImageDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -635,8 +620,7 @@ export namespace Prisma {
   export const ModelName: {
     User: 'User',
     Movies: 'Movies',
-    Genres: 'Genres',
-    Image: 'Image'
+    Genres: 'Genres'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -653,7 +637,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'user' | 'movies' | 'genres' | 'image'
+      modelProps: 'user' | 'movies' | 'genres'
       txIsolationLevel: never
     },
     model: {
@@ -879,80 +863,6 @@ export namespace Prisma {
           }
         }
       }
-      Image: {
-        payload: Prisma.$ImagePayload<ExtArgs>
-        fields: Prisma.ImageFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.ImageFindUniqueArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ImagePayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.ImageFindUniqueOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ImagePayload>
-          }
-          findFirst: {
-            args: Prisma.ImageFindFirstArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ImagePayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.ImageFindFirstOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ImagePayload>
-          }
-          findMany: {
-            args: Prisma.ImageFindManyArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ImagePayload>[]
-          }
-          create: {
-            args: Prisma.ImageCreateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ImagePayload>
-          }
-          createMany: {
-            args: Prisma.ImageCreateManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          delete: {
-            args: Prisma.ImageDeleteArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ImagePayload>
-          }
-          update: {
-            args: Prisma.ImageUpdateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ImagePayload>
-          }
-          deleteMany: {
-            args: Prisma.ImageDeleteManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          updateMany: {
-            args: Prisma.ImageUpdateManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          upsert: {
-            args: Prisma.ImageUpsertArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ImagePayload>
-          }
-          aggregate: {
-            args: Prisma.ImageAggregateArgs<ExtArgs>,
-            result: $Utils.Optional<AggregateImage>
-          }
-          groupBy: {
-            args: Prisma.ImageGroupByArgs<ExtArgs>,
-            result: $Utils.Optional<ImageGroupByOutputType>[]
-          }
-          findRaw: {
-            args: Prisma.ImageFindRawArgs<ExtArgs>,
-            result: Prisma.JsonObject
-          }
-          aggregateRaw: {
-            args: Prisma.ImageAggregateRawArgs<ExtArgs>,
-            result: Prisma.JsonObject
-          }
-          count: {
-            args: Prisma.ImageCountArgs<ExtArgs>,
-            result: $Utils.Optional<ImageCountAggregateOutputType> | number
-          }
-        }
-      }
     }
   } & {
     other: {
@@ -1148,40 +1058,6 @@ export namespace Prisma {
    */
   export type MoviesCountOutputTypeCountGenresArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     where?: GenresWhereInput
-  }
-
-
-
-  /**
-   * Count Type ImageCountOutputType
-   */
-
-  export type ImageCountOutputType = {
-    Movies: number
-  }
-
-  export type ImageCountOutputTypeSelect<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    Movies?: boolean | ImageCountOutputTypeCountMoviesArgs
-  }
-
-  // Custom InputTypes
-
-  /**
-   * ImageCountOutputType without action
-   */
-  export type ImageCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ImageCountOutputType
-     */
-    select?: ImageCountOutputTypeSelect<ExtArgs> | null
-  }
-
-
-  /**
-   * ImageCountOutputType without action
-   */
-  export type ImageCountOutputTypeCountMoviesArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    where?: MoviesWhereInput
   }
 
 
@@ -2214,10 +2090,11 @@ export namespace Prisma {
     title: string | null
     year: number | null
     score: number | null
+    poster_image: string | null
+    poster_image_id: string | null
     createdAt: Date | null
     updatedAt: Date | null
     userId: string | null
-    imageId: string | null
   }
 
   export type MoviesMaxAggregateOutputType = {
@@ -2225,10 +2102,11 @@ export namespace Prisma {
     title: string | null
     year: number | null
     score: number | null
+    poster_image: string | null
+    poster_image_id: string | null
     createdAt: Date | null
     updatedAt: Date | null
     userId: string | null
-    imageId: string | null
   }
 
   export type MoviesCountAggregateOutputType = {
@@ -2236,10 +2114,11 @@ export namespace Prisma {
     title: number
     year: number
     score: number
+    poster_image: number
+    poster_image_id: number
     createdAt: number
     updatedAt: number
     userId: number
-    imageId: number
     _all: number
   }
 
@@ -2259,10 +2138,11 @@ export namespace Prisma {
     title?: true
     year?: true
     score?: true
+    poster_image?: true
+    poster_image_id?: true
     createdAt?: true
     updatedAt?: true
     userId?: true
-    imageId?: true
   }
 
   export type MoviesMaxAggregateInputType = {
@@ -2270,10 +2150,11 @@ export namespace Prisma {
     title?: true
     year?: true
     score?: true
+    poster_image?: true
+    poster_image_id?: true
     createdAt?: true
     updatedAt?: true
     userId?: true
-    imageId?: true
   }
 
   export type MoviesCountAggregateInputType = {
@@ -2281,10 +2162,11 @@ export namespace Prisma {
     title?: true
     year?: true
     score?: true
+    poster_image?: true
+    poster_image_id?: true
     createdAt?: true
     updatedAt?: true
     userId?: true
-    imageId?: true
     _all?: true
   }
 
@@ -2379,10 +2261,11 @@ export namespace Prisma {
     title: string | null
     year: number | null
     score: number | null
+    poster_image: string | null
+    poster_image_id: string | null
     createdAt: Date
     updatedAt: Date
     userId: string | null
-    imageId: string
     _count: MoviesCountAggregateOutputType | null
     _avg: MoviesAvgAggregateOutputType | null
     _sum: MoviesSumAggregateOutputType | null
@@ -2409,11 +2292,11 @@ export namespace Prisma {
     title?: boolean
     year?: boolean
     score?: boolean
+    poster_image?: boolean
+    poster_image_id?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     userId?: boolean
-    imageId?: boolean
-    poster_image?: boolean | ImageDefaultArgs<ExtArgs>
     genres?: boolean | Movies$genresArgs<ExtArgs>
     User?: boolean | Movies$UserArgs<ExtArgs>
     _count?: boolean | MoviesCountOutputTypeDefaultArgs<ExtArgs>
@@ -2424,14 +2307,14 @@ export namespace Prisma {
     title?: boolean
     year?: boolean
     score?: boolean
+    poster_image?: boolean
+    poster_image_id?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     userId?: boolean
-    imageId?: boolean
   }
 
   export type MoviesInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    poster_image?: boolean | ImageDefaultArgs<ExtArgs>
     genres?: boolean | Movies$genresArgs<ExtArgs>
     User?: boolean | Movies$UserArgs<ExtArgs>
     _count?: boolean | MoviesCountOutputTypeDefaultArgs<ExtArgs>
@@ -2441,7 +2324,6 @@ export namespace Prisma {
   export type $MoviesPayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     name: "Movies"
     objects: {
-      poster_image: Prisma.$ImagePayload<ExtArgs>
       genres: Prisma.$GenresPayload<ExtArgs>[]
       User: Prisma.$UserPayload<ExtArgs> | null
     }
@@ -2450,10 +2332,11 @@ export namespace Prisma {
       title: string | null
       year: number | null
       score: number | null
+      poster_image: string | null
+      poster_image_id: string | null
       createdAt: Date
       updatedAt: Date
       userId: string | null
-      imageId: string
     }, ExtArgs["result"]["movies"]>
     composites: {}
   }
@@ -2846,8 +2729,6 @@ export namespace Prisma {
   export interface Prisma__MoviesClient<T, Null = never, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    poster_image<T extends ImageDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ImageDefaultArgs<ExtArgs>>): Prisma__ImageClient<$Result.GetResult<Prisma.$ImagePayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
-
     genres<T extends Movies$genresArgs<ExtArgs> = {}>(args?: Subset<T, Movies$genresArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GenresPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     User<T extends Movies$UserArgs<ExtArgs> = {}>(args?: Subset<T, Movies$UserArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
@@ -2884,10 +2765,11 @@ export namespace Prisma {
     readonly title: FieldRef<"Movies", 'String'>
     readonly year: FieldRef<"Movies", 'Int'>
     readonly score: FieldRef<"Movies", 'Int'>
+    readonly poster_image: FieldRef<"Movies", 'String'>
+    readonly poster_image_id: FieldRef<"Movies", 'String'>
     readonly createdAt: FieldRef<"Movies", 'DateTime'>
     readonly updatedAt: FieldRef<"Movies", 'DateTime'>
     readonly userId: FieldRef<"Movies", 'String'>
-    readonly imageId: FieldRef<"Movies", 'String'>
   }
     
 
@@ -4272,981 +4154,6 @@ export namespace Prisma {
 
 
   /**
-   * Model Image
-   */
-
-  export type AggregateImage = {
-    _count: ImageCountAggregateOutputType | null
-    _min: ImageMinAggregateOutputType | null
-    _max: ImageMaxAggregateOutputType | null
-  }
-
-  export type ImageMinAggregateOutputType = {
-    id: string | null
-    public_id: string | null
-    secure_url: string | null
-  }
-
-  export type ImageMaxAggregateOutputType = {
-    id: string | null
-    public_id: string | null
-    secure_url: string | null
-  }
-
-  export type ImageCountAggregateOutputType = {
-    id: number
-    public_id: number
-    secure_url: number
-    _all: number
-  }
-
-
-  export type ImageMinAggregateInputType = {
-    id?: true
-    public_id?: true
-    secure_url?: true
-  }
-
-  export type ImageMaxAggregateInputType = {
-    id?: true
-    public_id?: true
-    secure_url?: true
-  }
-
-  export type ImageCountAggregateInputType = {
-    id?: true
-    public_id?: true
-    secure_url?: true
-    _all?: true
-  }
-
-  export type ImageAggregateArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Image to aggregate.
-     */
-    where?: ImageWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Images to fetch.
-     */
-    orderBy?: ImageOrderByWithRelationInput | ImageOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: ImageWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Images from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Images.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Images
-    **/
-    _count?: true | ImageCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: ImageMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: ImageMaxAggregateInputType
-  }
-
-  export type GetImageAggregateType<T extends ImageAggregateArgs> = {
-        [P in keyof T & keyof AggregateImage]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateImage[P]>
-      : GetScalarType<T[P], AggregateImage[P]>
-  }
-
-
-
-
-  export type ImageGroupByArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    where?: ImageWhereInput
-    orderBy?: ImageOrderByWithAggregationInput | ImageOrderByWithAggregationInput[]
-    by: ImageScalarFieldEnum[] | ImageScalarFieldEnum
-    having?: ImageScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: ImageCountAggregateInputType | true
-    _min?: ImageMinAggregateInputType
-    _max?: ImageMaxAggregateInputType
-  }
-
-  export type ImageGroupByOutputType = {
-    id: string
-    public_id: string
-    secure_url: string
-    _count: ImageCountAggregateOutputType | null
-    _min: ImageMinAggregateOutputType | null
-    _max: ImageMaxAggregateOutputType | null
-  }
-
-  type GetImageGroupByPayload<T extends ImageGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<ImageGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof ImageGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], ImageGroupByOutputType[P]>
-            : GetScalarType<T[P], ImageGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type ImageSelect<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    public_id?: boolean
-    secure_url?: boolean
-    Movies?: boolean | Image$MoviesArgs<ExtArgs>
-    _count?: boolean | ImageCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["image"]>
-
-  export type ImageSelectScalar = {
-    id?: boolean
-    public_id?: boolean
-    secure_url?: boolean
-  }
-
-  export type ImageInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    Movies?: boolean | Image$MoviesArgs<ExtArgs>
-    _count?: boolean | ImageCountOutputTypeDefaultArgs<ExtArgs>
-  }
-
-
-  export type $ImagePayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    name: "Image"
-    objects: {
-      Movies: Prisma.$MoviesPayload<ExtArgs>[]
-    }
-    scalars: $Extensions.GetResult<{
-      id: string
-      public_id: string
-      secure_url: string
-    }, ExtArgs["result"]["image"]>
-    composites: {}
-  }
-
-
-  type ImageGetPayload<S extends boolean | null | undefined | ImageDefaultArgs> = $Result.GetResult<Prisma.$ImagePayload, S>
-
-  type ImageCountArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = 
-    Omit<ImageFindManyArgs, 'select' | 'include'> & {
-      select?: ImageCountAggregateInputType | true
-    }
-
-  export interface ImageDelegate<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Image'], meta: { name: 'Image' } }
-    /**
-     * Find zero or one Image that matches the filter.
-     * @param {ImageFindUniqueArgs} args - Arguments to find a Image
-     * @example
-     * // Get one Image
-     * const image = await prisma.image.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUnique<T extends ImageFindUniqueArgs<ExtArgs>>(
-      args: SelectSubset<T, ImageFindUniqueArgs<ExtArgs>>
-    ): Prisma__ImageClient<$Result.GetResult<Prisma.$ImagePayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
-
-    /**
-     * Find one Image that matches the filter or throw an error  with `error.code='P2025'` 
-     *     if no matches were found.
-     * @param {ImageFindUniqueOrThrowArgs} args - Arguments to find a Image
-     * @example
-     * // Get one Image
-     * const image = await prisma.image.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUniqueOrThrow<T extends ImageFindUniqueOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, ImageFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__ImageClient<$Result.GetResult<Prisma.$ImagePayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
-
-    /**
-     * Find the first Image that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ImageFindFirstArgs} args - Arguments to find a Image
-     * @example
-     * // Get one Image
-     * const image = await prisma.image.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirst<T extends ImageFindFirstArgs<ExtArgs>>(
-      args?: SelectSubset<T, ImageFindFirstArgs<ExtArgs>>
-    ): Prisma__ImageClient<$Result.GetResult<Prisma.$ImagePayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
-
-    /**
-     * Find the first Image that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ImageFindFirstOrThrowArgs} args - Arguments to find a Image
-     * @example
-     * // Get one Image
-     * const image = await prisma.image.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirstOrThrow<T extends ImageFindFirstOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, ImageFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__ImageClient<$Result.GetResult<Prisma.$ImagePayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
-
-    /**
-     * Find zero or more Images that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ImageFindManyArgs=} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Images
-     * const images = await prisma.image.findMany()
-     * 
-     * // Get first 10 Images
-     * const images = await prisma.image.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const imageWithIdOnly = await prisma.image.findMany({ select: { id: true } })
-     * 
-    **/
-    findMany<T extends ImageFindManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, ImageFindManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ImagePayload<ExtArgs>, T, 'findMany'>>
-
-    /**
-     * Create a Image.
-     * @param {ImageCreateArgs} args - Arguments to create a Image.
-     * @example
-     * // Create one Image
-     * const Image = await prisma.image.create({
-     *   data: {
-     *     // ... data to create a Image
-     *   }
-     * })
-     * 
-    **/
-    create<T extends ImageCreateArgs<ExtArgs>>(
-      args: SelectSubset<T, ImageCreateArgs<ExtArgs>>
-    ): Prisma__ImageClient<$Result.GetResult<Prisma.$ImagePayload<ExtArgs>, T, 'create'>, never, ExtArgs>
-
-    /**
-     * Create many Images.
-     *     @param {ImageCreateManyArgs} args - Arguments to create many Images.
-     *     @example
-     *     // Create many Images
-     *     const image = await prisma.image.createMany({
-     *       data: {
-     *         // ... provide data here
-     *       }
-     *     })
-     *     
-    **/
-    createMany<T extends ImageCreateManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, ImageCreateManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Delete a Image.
-     * @param {ImageDeleteArgs} args - Arguments to delete one Image.
-     * @example
-     * // Delete one Image
-     * const Image = await prisma.image.delete({
-     *   where: {
-     *     // ... filter to delete one Image
-     *   }
-     * })
-     * 
-    **/
-    delete<T extends ImageDeleteArgs<ExtArgs>>(
-      args: SelectSubset<T, ImageDeleteArgs<ExtArgs>>
-    ): Prisma__ImageClient<$Result.GetResult<Prisma.$ImagePayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
-
-    /**
-     * Update one Image.
-     * @param {ImageUpdateArgs} args - Arguments to update one Image.
-     * @example
-     * // Update one Image
-     * const image = await prisma.image.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-    **/
-    update<T extends ImageUpdateArgs<ExtArgs>>(
-      args: SelectSubset<T, ImageUpdateArgs<ExtArgs>>
-    ): Prisma__ImageClient<$Result.GetResult<Prisma.$ImagePayload<ExtArgs>, T, 'update'>, never, ExtArgs>
-
-    /**
-     * Delete zero or more Images.
-     * @param {ImageDeleteManyArgs} args - Arguments to filter Images to delete.
-     * @example
-     * // Delete a few Images
-     * const { count } = await prisma.image.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-    **/
-    deleteMany<T extends ImageDeleteManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, ImageDeleteManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Images.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ImageUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Images
-     * const image = await prisma.image.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-    **/
-    updateMany<T extends ImageUpdateManyArgs<ExtArgs>>(
-      args: SelectSubset<T, ImageUpdateManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one Image.
-     * @param {ImageUpsertArgs} args - Arguments to update or create a Image.
-     * @example
-     * // Update or create a Image
-     * const image = await prisma.image.upsert({
-     *   create: {
-     *     // ... data to create a Image
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Image we want to update
-     *   }
-     * })
-    **/
-    upsert<T extends ImageUpsertArgs<ExtArgs>>(
-      args: SelectSubset<T, ImageUpsertArgs<ExtArgs>>
-    ): Prisma__ImageClient<$Result.GetResult<Prisma.$ImagePayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
-
-    /**
-     * Find zero or more Images that matches the filter.
-     * @param {ImageFindRawArgs} args - Select which filters you would like to apply.
-     * @example
-     * const image = await prisma.image.findRaw({
-     *   filter: { age: { $gt: 25 } } 
-     * })
-    **/
-    findRaw(
-      args?: ImageFindRawArgs
-    ): Prisma.PrismaPromise<JsonObject>
-
-    /**
-     * Perform aggregation operations on a Image.
-     * @param {ImageAggregateRawArgs} args - Select which aggregations you would like to apply.
-     * @example
-     * const image = await prisma.image.aggregateRaw({
-     *   pipeline: [
-     *     { $match: { status: "registered" } },
-     *     { $group: { _id: "$country", total: { $sum: 1 } } }
-     *   ]
-     * })
-    **/
-    aggregateRaw(
-      args?: ImageAggregateRawArgs
-    ): Prisma.PrismaPromise<JsonObject>
-
-    /**
-     * Count the number of Images.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ImageCountArgs} args - Arguments to filter Images to count.
-     * @example
-     * // Count the number of Images
-     * const count = await prisma.image.count({
-     *   where: {
-     *     // ... the filter for the Images we want to count
-     *   }
-     * })
-    **/
-    count<T extends ImageCountArgs>(
-      args?: Subset<T, ImageCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], ImageCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Image.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ImageAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends ImageAggregateArgs>(args: Subset<T, ImageAggregateArgs>): Prisma.PrismaPromise<GetImageAggregateType<T>>
-
-    /**
-     * Group by Image.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ImageGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends ImageGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: ImageGroupByArgs['orderBy'] }
-        : { orderBy?: ImageGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, ImageGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetImageGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Image model
-   */
-  readonly fields: ImageFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Image.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__ImageClient<T, Null = never, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: 'PrismaPromise';
-
-    Movies<T extends Image$MoviesArgs<ExtArgs> = {}>(args?: Subset<T, Image$MoviesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MoviesPayload<ExtArgs>, T, 'findMany'> | Null>;
-
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
-  }
-
-
-
-  /**
-   * Fields of the Image model
-   */ 
-  interface ImageFieldRefs {
-    readonly id: FieldRef<"Image", 'String'>
-    readonly public_id: FieldRef<"Image", 'String'>
-    readonly secure_url: FieldRef<"Image", 'String'>
-  }
-    
-
-  // Custom InputTypes
-
-  /**
-   * Image findUnique
-   */
-  export type ImageFindUniqueArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Image
-     */
-    select?: ImageSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: ImageInclude<ExtArgs> | null
-    /**
-     * Filter, which Image to fetch.
-     */
-    where: ImageWhereUniqueInput
-  }
-
-
-  /**
-   * Image findUniqueOrThrow
-   */
-  export type ImageFindUniqueOrThrowArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Image
-     */
-    select?: ImageSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: ImageInclude<ExtArgs> | null
-    /**
-     * Filter, which Image to fetch.
-     */
-    where: ImageWhereUniqueInput
-  }
-
-
-  /**
-   * Image findFirst
-   */
-  export type ImageFindFirstArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Image
-     */
-    select?: ImageSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: ImageInclude<ExtArgs> | null
-    /**
-     * Filter, which Image to fetch.
-     */
-    where?: ImageWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Images to fetch.
-     */
-    orderBy?: ImageOrderByWithRelationInput | ImageOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Images.
-     */
-    cursor?: ImageWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Images from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Images.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Images.
-     */
-    distinct?: ImageScalarFieldEnum | ImageScalarFieldEnum[]
-  }
-
-
-  /**
-   * Image findFirstOrThrow
-   */
-  export type ImageFindFirstOrThrowArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Image
-     */
-    select?: ImageSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: ImageInclude<ExtArgs> | null
-    /**
-     * Filter, which Image to fetch.
-     */
-    where?: ImageWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Images to fetch.
-     */
-    orderBy?: ImageOrderByWithRelationInput | ImageOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Images.
-     */
-    cursor?: ImageWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Images from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Images.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Images.
-     */
-    distinct?: ImageScalarFieldEnum | ImageScalarFieldEnum[]
-  }
-
-
-  /**
-   * Image findMany
-   */
-  export type ImageFindManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Image
-     */
-    select?: ImageSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: ImageInclude<ExtArgs> | null
-    /**
-     * Filter, which Images to fetch.
-     */
-    where?: ImageWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Images to fetch.
-     */
-    orderBy?: ImageOrderByWithRelationInput | ImageOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Images.
-     */
-    cursor?: ImageWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Images from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Images.
-     */
-    skip?: number
-    distinct?: ImageScalarFieldEnum | ImageScalarFieldEnum[]
-  }
-
-
-  /**
-   * Image create
-   */
-  export type ImageCreateArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Image
-     */
-    select?: ImageSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: ImageInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Image.
-     */
-    data: XOR<ImageCreateInput, ImageUncheckedCreateInput>
-  }
-
-
-  /**
-   * Image createMany
-   */
-  export type ImageCreateManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Images.
-     */
-    data: ImageCreateManyInput | ImageCreateManyInput[]
-  }
-
-
-  /**
-   * Image update
-   */
-  export type ImageUpdateArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Image
-     */
-    select?: ImageSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: ImageInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Image.
-     */
-    data: XOR<ImageUpdateInput, ImageUncheckedUpdateInput>
-    /**
-     * Choose, which Image to update.
-     */
-    where: ImageWhereUniqueInput
-  }
-
-
-  /**
-   * Image updateMany
-   */
-  export type ImageUpdateManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Images.
-     */
-    data: XOR<ImageUpdateManyMutationInput, ImageUncheckedUpdateManyInput>
-    /**
-     * Filter which Images to update
-     */
-    where?: ImageWhereInput
-  }
-
-
-  /**
-   * Image upsert
-   */
-  export type ImageUpsertArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Image
-     */
-    select?: ImageSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: ImageInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Image to update in case it exists.
-     */
-    where: ImageWhereUniqueInput
-    /**
-     * In case the Image found by the `where` argument doesn't exist, create a new Image with this data.
-     */
-    create: XOR<ImageCreateInput, ImageUncheckedCreateInput>
-    /**
-     * In case the Image was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<ImageUpdateInput, ImageUncheckedUpdateInput>
-  }
-
-
-  /**
-   * Image delete
-   */
-  export type ImageDeleteArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Image
-     */
-    select?: ImageSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: ImageInclude<ExtArgs> | null
-    /**
-     * Filter which Image to delete.
-     */
-    where: ImageWhereUniqueInput
-  }
-
-
-  /**
-   * Image deleteMany
-   */
-  export type ImageDeleteManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Images to delete
-     */
-    where?: ImageWhereInput
-  }
-
-
-  /**
-   * Image findRaw
-   */
-  export type ImageFindRawArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    /**
-     * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
-     */
-    filter?: InputJsonValue
-    /**
-     * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
-     */
-    options?: InputJsonValue
-  }
-
-
-  /**
-   * Image aggregateRaw
-   */
-  export type ImageAggregateRawArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    /**
-     * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
-     */
-    pipeline?: InputJsonValue[]
-    /**
-     * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
-     */
-    options?: InputJsonValue
-  }
-
-
-  /**
-   * Image.Movies
-   */
-  export type Image$MoviesArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Movies
-     */
-    select?: MoviesSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: MoviesInclude<ExtArgs> | null
-    where?: MoviesWhereInput
-    orderBy?: MoviesOrderByWithRelationInput | MoviesOrderByWithRelationInput[]
-    cursor?: MoviesWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: MoviesScalarFieldEnum | MoviesScalarFieldEnum[]
-  }
-
-
-  /**
-   * Image without action
-   */
-  export type ImageDefaultArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Image
-     */
-    select?: ImageSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: ImageInclude<ExtArgs> | null
-  }
-
-
-
-  /**
    * Enums
    */
 
@@ -5266,10 +4173,11 @@ export namespace Prisma {
     title: 'title',
     year: 'year',
     score: 'score',
+    poster_image: 'poster_image',
+    poster_image_id: 'poster_image_id',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
-    userId: 'userId',
-    imageId: 'imageId'
+    userId: 'userId'
   };
 
   export type MoviesScalarFieldEnum = (typeof MoviesScalarFieldEnum)[keyof typeof MoviesScalarFieldEnum]
@@ -5284,15 +4192,6 @@ export namespace Prisma {
   };
 
   export type GenresScalarFieldEnum = (typeof GenresScalarFieldEnum)[keyof typeof GenresScalarFieldEnum]
-
-
-  export const ImageScalarFieldEnum: {
-    id: 'id',
-    public_id: 'public_id',
-    secure_url: 'secure_url'
-  };
-
-  export type ImageScalarFieldEnum = (typeof ImageScalarFieldEnum)[keyof typeof ImageScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -5438,11 +4337,11 @@ export namespace Prisma {
     title?: StringNullableFilter<"Movies"> | string | null
     year?: IntNullableFilter<"Movies"> | number | null
     score?: IntNullableFilter<"Movies"> | number | null
+    poster_image?: StringNullableFilter<"Movies"> | string | null
+    poster_image_id?: StringNullableFilter<"Movies"> | string | null
     createdAt?: DateTimeFilter<"Movies"> | Date | string
     updatedAt?: DateTimeFilter<"Movies"> | Date | string
     userId?: StringNullableFilter<"Movies"> | string | null
-    imageId?: StringFilter<"Movies"> | string
-    poster_image?: XOR<ImageRelationFilter, ImageWhereInput>
     genres?: GenresListRelationFilter
     User?: XOR<UserNullableRelationFilter, UserWhereInput> | null
   }
@@ -5452,11 +4351,11 @@ export namespace Prisma {
     title?: SortOrder
     year?: SortOrder
     score?: SortOrder
+    poster_image?: SortOrder
+    poster_image_id?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
-    imageId?: SortOrder
-    poster_image?: ImageOrderByWithRelationInput
     genres?: GenresOrderByRelationAggregateInput
     User?: UserOrderByWithRelationInput
   }
@@ -5469,11 +4368,11 @@ export namespace Prisma {
     title?: StringNullableFilter<"Movies"> | string | null
     year?: IntNullableFilter<"Movies"> | number | null
     score?: IntNullableFilter<"Movies"> | number | null
+    poster_image?: StringNullableFilter<"Movies"> | string | null
+    poster_image_id?: StringNullableFilter<"Movies"> | string | null
     createdAt?: DateTimeFilter<"Movies"> | Date | string
     updatedAt?: DateTimeFilter<"Movies"> | Date | string
     userId?: StringNullableFilter<"Movies"> | string | null
-    imageId?: StringFilter<"Movies"> | string
-    poster_image?: XOR<ImageRelationFilter, ImageWhereInput>
     genres?: GenresListRelationFilter
     User?: XOR<UserNullableRelationFilter, UserWhereInput> | null
   }, "id">
@@ -5483,10 +4382,11 @@ export namespace Prisma {
     title?: SortOrder
     year?: SortOrder
     score?: SortOrder
+    poster_image?: SortOrder
+    poster_image_id?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
-    imageId?: SortOrder
     _count?: MoviesCountOrderByAggregateInput
     _avg?: MoviesAvgOrderByAggregateInput
     _max?: MoviesMaxOrderByAggregateInput
@@ -5502,10 +4402,11 @@ export namespace Prisma {
     title?: StringNullableWithAggregatesFilter<"Movies"> | string | null
     year?: IntNullableWithAggregatesFilter<"Movies"> | number | null
     score?: IntNullableWithAggregatesFilter<"Movies"> | number | null
+    poster_image?: StringNullableWithAggregatesFilter<"Movies"> | string | null
+    poster_image_id?: StringNullableWithAggregatesFilter<"Movies"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Movies"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Movies"> | Date | string
     userId?: StringNullableWithAggregatesFilter<"Movies"> | string | null
-    imageId?: StringWithAggregatesFilter<"Movies"> | string
   }
 
   export type GenresWhereInput = {
@@ -5561,51 +4462,6 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Genres"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Genres"> | Date | string
     moviesId?: StringNullableWithAggregatesFilter<"Genres"> | string | null
-  }
-
-  export type ImageWhereInput = {
-    AND?: ImageWhereInput | ImageWhereInput[]
-    OR?: ImageWhereInput[]
-    NOT?: ImageWhereInput | ImageWhereInput[]
-    id?: StringFilter<"Image"> | string
-    public_id?: StringFilter<"Image"> | string
-    secure_url?: StringFilter<"Image"> | string
-    Movies?: MoviesListRelationFilter
-  }
-
-  export type ImageOrderByWithRelationInput = {
-    id?: SortOrder
-    public_id?: SortOrder
-    secure_url?: SortOrder
-    Movies?: MoviesOrderByRelationAggregateInput
-  }
-
-  export type ImageWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: ImageWhereInput | ImageWhereInput[]
-    OR?: ImageWhereInput[]
-    NOT?: ImageWhereInput | ImageWhereInput[]
-    public_id?: StringFilter<"Image"> | string
-    secure_url?: StringFilter<"Image"> | string
-    Movies?: MoviesListRelationFilter
-  }, "id">
-
-  export type ImageOrderByWithAggregationInput = {
-    id?: SortOrder
-    public_id?: SortOrder
-    secure_url?: SortOrder
-    _count?: ImageCountOrderByAggregateInput
-    _max?: ImageMaxOrderByAggregateInput
-    _min?: ImageMinOrderByAggregateInput
-  }
-
-  export type ImageScalarWhereWithAggregatesInput = {
-    AND?: ImageScalarWhereWithAggregatesInput | ImageScalarWhereWithAggregatesInput[]
-    OR?: ImageScalarWhereWithAggregatesInput[]
-    NOT?: ImageScalarWhereWithAggregatesInput | ImageScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Image"> | string
-    public_id?: StringWithAggregatesFilter<"Image"> | string
-    secure_url?: StringWithAggregatesFilter<"Image"> | string
   }
 
   export type UserCreateInput = {
@@ -5669,9 +4525,10 @@ export namespace Prisma {
     title?: string | null
     year?: number | null
     score?: number | null
+    poster_image?: string | null
+    poster_image_id?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    poster_image: ImageCreateNestedOneWithoutMoviesInput
     genres?: GenresCreateNestedManyWithoutMoviesInput
     User?: UserCreateNestedOneWithoutMoviesInput
   }
@@ -5681,10 +4538,11 @@ export namespace Prisma {
     title?: string | null
     year?: number | null
     score?: number | null
+    poster_image?: string | null
+    poster_image_id?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     userId?: string | null
-    imageId: string
     genres?: GenresUncheckedCreateNestedManyWithoutMoviesInput
   }
 
@@ -5692,9 +4550,10 @@ export namespace Prisma {
     title?: NullableStringFieldUpdateOperationsInput | string | null
     year?: NullableIntFieldUpdateOperationsInput | number | null
     score?: NullableIntFieldUpdateOperationsInput | number | null
+    poster_image?: NullableStringFieldUpdateOperationsInput | string | null
+    poster_image_id?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    poster_image?: ImageUpdateOneRequiredWithoutMoviesNestedInput
     genres?: GenresUpdateManyWithoutMoviesNestedInput
     User?: UserUpdateOneWithoutMoviesNestedInput
   }
@@ -5703,10 +4562,11 @@ export namespace Prisma {
     title?: NullableStringFieldUpdateOperationsInput | string | null
     year?: NullableIntFieldUpdateOperationsInput | number | null
     score?: NullableIntFieldUpdateOperationsInput | number | null
+    poster_image?: NullableStringFieldUpdateOperationsInput | string | null
+    poster_image_id?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
-    imageId?: StringFieldUpdateOperationsInput | string
     genres?: GenresUncheckedUpdateManyWithoutMoviesNestedInput
   }
 
@@ -5715,16 +4575,19 @@ export namespace Prisma {
     title?: string | null
     year?: number | null
     score?: number | null
+    poster_image?: string | null
+    poster_image_id?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     userId?: string | null
-    imageId: string
   }
 
   export type MoviesUpdateManyMutationInput = {
     title?: NullableStringFieldUpdateOperationsInput | string | null
     year?: NullableIntFieldUpdateOperationsInput | number | null
     score?: NullableIntFieldUpdateOperationsInput | number | null
+    poster_image?: NullableStringFieldUpdateOperationsInput | string | null
+    poster_image_id?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -5733,10 +4596,11 @@ export namespace Prisma {
     title?: NullableStringFieldUpdateOperationsInput | string | null
     year?: NullableIntFieldUpdateOperationsInput | number | null
     score?: NullableIntFieldUpdateOperationsInput | number | null
+    poster_image?: NullableStringFieldUpdateOperationsInput | string | null
+    poster_image_id?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
-    imageId?: StringFieldUpdateOperationsInput | string
   }
 
   export type GenresCreateInput = {
@@ -5788,48 +4652,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     moviesId?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type ImageCreateInput = {
-    id?: string
-    public_id: string
-    secure_url: string
-    Movies?: MoviesCreateNestedManyWithoutPoster_imageInput
-  }
-
-  export type ImageUncheckedCreateInput = {
-    id?: string
-    public_id: string
-    secure_url: string
-    Movies?: MoviesUncheckedCreateNestedManyWithoutPoster_imageInput
-  }
-
-  export type ImageUpdateInput = {
-    public_id?: StringFieldUpdateOperationsInput | string
-    secure_url?: StringFieldUpdateOperationsInput | string
-    Movies?: MoviesUpdateManyWithoutPoster_imageNestedInput
-  }
-
-  export type ImageUncheckedUpdateInput = {
-    public_id?: StringFieldUpdateOperationsInput | string
-    secure_url?: StringFieldUpdateOperationsInput | string
-    Movies?: MoviesUncheckedUpdateManyWithoutPoster_imageNestedInput
-  }
-
-  export type ImageCreateManyInput = {
-    id?: string
-    public_id: string
-    secure_url: string
-  }
-
-  export type ImageUpdateManyMutationInput = {
-    public_id?: StringFieldUpdateOperationsInput | string
-    secure_url?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type ImageUncheckedUpdateManyInput = {
-    public_id?: StringFieldUpdateOperationsInput | string
-    secure_url?: StringFieldUpdateOperationsInput | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -5971,11 +4793,6 @@ export namespace Prisma {
     isSet?: boolean
   }
 
-  export type ImageRelationFilter = {
-    is?: ImageWhereInput
-    isNot?: ImageWhereInput
-  }
-
   export type GenresListRelationFilter = {
     every?: GenresWhereInput
     some?: GenresWhereInput
@@ -5996,10 +4813,11 @@ export namespace Prisma {
     title?: SortOrder
     year?: SortOrder
     score?: SortOrder
+    poster_image?: SortOrder
+    poster_image_id?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
-    imageId?: SortOrder
   }
 
   export type MoviesAvgOrderByAggregateInput = {
@@ -6012,10 +4830,11 @@ export namespace Prisma {
     title?: SortOrder
     year?: SortOrder
     score?: SortOrder
+    poster_image?: SortOrder
+    poster_image_id?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
-    imageId?: SortOrder
   }
 
   export type MoviesMinOrderByAggregateInput = {
@@ -6023,10 +4842,11 @@ export namespace Prisma {
     title?: SortOrder
     year?: SortOrder
     score?: SortOrder
+    poster_image?: SortOrder
+    poster_image_id?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
-    imageId?: SortOrder
   }
 
   export type MoviesSumOrderByAggregateInput = {
@@ -6078,24 +4898,6 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     moviesId?: SortOrder
-  }
-
-  export type ImageCountOrderByAggregateInput = {
-    id?: SortOrder
-    public_id?: SortOrder
-    secure_url?: SortOrder
-  }
-
-  export type ImageMaxOrderByAggregateInput = {
-    id?: SortOrder
-    public_id?: SortOrder
-    secure_url?: SortOrder
-  }
-
-  export type ImageMinOrderByAggregateInput = {
-    id?: SortOrder
-    public_id?: SortOrder
-    secure_url?: SortOrder
   }
 
   export type MoviesCreateNestedManyWithoutUserInput = {
@@ -6153,12 +4955,6 @@ export namespace Prisma {
     deleteMany?: MoviesScalarWhereInput | MoviesScalarWhereInput[]
   }
 
-  export type ImageCreateNestedOneWithoutMoviesInput = {
-    create?: XOR<ImageCreateWithoutMoviesInput, ImageUncheckedCreateWithoutMoviesInput>
-    connectOrCreate?: ImageCreateOrConnectWithoutMoviesInput
-    connect?: ImageWhereUniqueInput
-  }
-
   export type GenresCreateNestedManyWithoutMoviesInput = {
     create?: XOR<GenresCreateWithoutMoviesInput, GenresUncheckedCreateWithoutMoviesInput> | GenresCreateWithoutMoviesInput[] | GenresUncheckedCreateWithoutMoviesInput[]
     connectOrCreate?: GenresCreateOrConnectWithoutMoviesInput | GenresCreateOrConnectWithoutMoviesInput[]
@@ -6186,14 +4982,6 @@ export namespace Prisma {
     multiply?: number
     divide?: number
     unset?: boolean
-  }
-
-  export type ImageUpdateOneRequiredWithoutMoviesNestedInput = {
-    create?: XOR<ImageCreateWithoutMoviesInput, ImageUncheckedCreateWithoutMoviesInput>
-    connectOrCreate?: ImageCreateOrConnectWithoutMoviesInput
-    upsert?: ImageUpsertWithoutMoviesInput
-    connect?: ImageWhereUniqueInput
-    update?: XOR<XOR<ImageUpdateToOneWithWhereWithoutMoviesInput, ImageUpdateWithoutMoviesInput>, ImageUncheckedUpdateWithoutMoviesInput>
   }
 
   export type GenresUpdateManyWithoutMoviesNestedInput = {
@@ -6248,48 +5036,6 @@ export namespace Prisma {
     delete?: MoviesWhereInput | boolean
     connect?: MoviesWhereUniqueInput
     update?: XOR<XOR<MoviesUpdateToOneWithWhereWithoutGenresInput, MoviesUpdateWithoutGenresInput>, MoviesUncheckedUpdateWithoutGenresInput>
-  }
-
-  export type MoviesCreateNestedManyWithoutPoster_imageInput = {
-    create?: XOR<MoviesCreateWithoutPoster_imageInput, MoviesUncheckedCreateWithoutPoster_imageInput> | MoviesCreateWithoutPoster_imageInput[] | MoviesUncheckedCreateWithoutPoster_imageInput[]
-    connectOrCreate?: MoviesCreateOrConnectWithoutPoster_imageInput | MoviesCreateOrConnectWithoutPoster_imageInput[]
-    createMany?: MoviesCreateManyPoster_imageInputEnvelope
-    connect?: MoviesWhereUniqueInput | MoviesWhereUniqueInput[]
-  }
-
-  export type MoviesUncheckedCreateNestedManyWithoutPoster_imageInput = {
-    create?: XOR<MoviesCreateWithoutPoster_imageInput, MoviesUncheckedCreateWithoutPoster_imageInput> | MoviesCreateWithoutPoster_imageInput[] | MoviesUncheckedCreateWithoutPoster_imageInput[]
-    connectOrCreate?: MoviesCreateOrConnectWithoutPoster_imageInput | MoviesCreateOrConnectWithoutPoster_imageInput[]
-    createMany?: MoviesCreateManyPoster_imageInputEnvelope
-    connect?: MoviesWhereUniqueInput | MoviesWhereUniqueInput[]
-  }
-
-  export type MoviesUpdateManyWithoutPoster_imageNestedInput = {
-    create?: XOR<MoviesCreateWithoutPoster_imageInput, MoviesUncheckedCreateWithoutPoster_imageInput> | MoviesCreateWithoutPoster_imageInput[] | MoviesUncheckedCreateWithoutPoster_imageInput[]
-    connectOrCreate?: MoviesCreateOrConnectWithoutPoster_imageInput | MoviesCreateOrConnectWithoutPoster_imageInput[]
-    upsert?: MoviesUpsertWithWhereUniqueWithoutPoster_imageInput | MoviesUpsertWithWhereUniqueWithoutPoster_imageInput[]
-    createMany?: MoviesCreateManyPoster_imageInputEnvelope
-    set?: MoviesWhereUniqueInput | MoviesWhereUniqueInput[]
-    disconnect?: MoviesWhereUniqueInput | MoviesWhereUniqueInput[]
-    delete?: MoviesWhereUniqueInput | MoviesWhereUniqueInput[]
-    connect?: MoviesWhereUniqueInput | MoviesWhereUniqueInput[]
-    update?: MoviesUpdateWithWhereUniqueWithoutPoster_imageInput | MoviesUpdateWithWhereUniqueWithoutPoster_imageInput[]
-    updateMany?: MoviesUpdateManyWithWhereWithoutPoster_imageInput | MoviesUpdateManyWithWhereWithoutPoster_imageInput[]
-    deleteMany?: MoviesScalarWhereInput | MoviesScalarWhereInput[]
-  }
-
-  export type MoviesUncheckedUpdateManyWithoutPoster_imageNestedInput = {
-    create?: XOR<MoviesCreateWithoutPoster_imageInput, MoviesUncheckedCreateWithoutPoster_imageInput> | MoviesCreateWithoutPoster_imageInput[] | MoviesUncheckedCreateWithoutPoster_imageInput[]
-    connectOrCreate?: MoviesCreateOrConnectWithoutPoster_imageInput | MoviesCreateOrConnectWithoutPoster_imageInput[]
-    upsert?: MoviesUpsertWithWhereUniqueWithoutPoster_imageInput | MoviesUpsertWithWhereUniqueWithoutPoster_imageInput[]
-    createMany?: MoviesCreateManyPoster_imageInputEnvelope
-    set?: MoviesWhereUniqueInput | MoviesWhereUniqueInput[]
-    disconnect?: MoviesWhereUniqueInput | MoviesWhereUniqueInput[]
-    delete?: MoviesWhereUniqueInput | MoviesWhereUniqueInput[]
-    connect?: MoviesWhereUniqueInput | MoviesWhereUniqueInput[]
-    update?: MoviesUpdateWithWhereUniqueWithoutPoster_imageInput | MoviesUpdateWithWhereUniqueWithoutPoster_imageInput[]
-    updateMany?: MoviesUpdateManyWithWhereWithoutPoster_imageInput | MoviesUpdateManyWithWhereWithoutPoster_imageInput[]
-    deleteMany?: MoviesScalarWhereInput | MoviesScalarWhereInput[]
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -6438,9 +5184,10 @@ export namespace Prisma {
     title?: string | null
     year?: number | null
     score?: number | null
+    poster_image?: string | null
+    poster_image_id?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    poster_image: ImageCreateNestedOneWithoutMoviesInput
     genres?: GenresCreateNestedManyWithoutMoviesInput
   }
 
@@ -6449,9 +5196,10 @@ export namespace Prisma {
     title?: string | null
     year?: number | null
     score?: number | null
+    poster_image?: string | null
+    poster_image_id?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    imageId: string
     genres?: GenresUncheckedCreateNestedManyWithoutMoviesInput
   }
 
@@ -6488,27 +5236,11 @@ export namespace Prisma {
     title?: StringNullableFilter<"Movies"> | string | null
     year?: IntNullableFilter<"Movies"> | number | null
     score?: IntNullableFilter<"Movies"> | number | null
+    poster_image?: StringNullableFilter<"Movies"> | string | null
+    poster_image_id?: StringNullableFilter<"Movies"> | string | null
     createdAt?: DateTimeFilter<"Movies"> | Date | string
     updatedAt?: DateTimeFilter<"Movies"> | Date | string
     userId?: StringNullableFilter<"Movies"> | string | null
-    imageId?: StringFilter<"Movies"> | string
-  }
-
-  export type ImageCreateWithoutMoviesInput = {
-    id?: string
-    public_id: string
-    secure_url: string
-  }
-
-  export type ImageUncheckedCreateWithoutMoviesInput = {
-    id?: string
-    public_id: string
-    secure_url: string
-  }
-
-  export type ImageCreateOrConnectWithoutMoviesInput = {
-    where: ImageWhereUniqueInput
-    create: XOR<ImageCreateWithoutMoviesInput, ImageUncheckedCreateWithoutMoviesInput>
   }
 
   export type GenresCreateWithoutMoviesInput = {
@@ -6553,27 +5285,6 @@ export namespace Prisma {
   export type UserCreateOrConnectWithoutMoviesInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutMoviesInput, UserUncheckedCreateWithoutMoviesInput>
-  }
-
-  export type ImageUpsertWithoutMoviesInput = {
-    update: XOR<ImageUpdateWithoutMoviesInput, ImageUncheckedUpdateWithoutMoviesInput>
-    create: XOR<ImageCreateWithoutMoviesInput, ImageUncheckedCreateWithoutMoviesInput>
-    where?: ImageWhereInput
-  }
-
-  export type ImageUpdateToOneWithWhereWithoutMoviesInput = {
-    where?: ImageWhereInput
-    data: XOR<ImageUpdateWithoutMoviesInput, ImageUncheckedUpdateWithoutMoviesInput>
-  }
-
-  export type ImageUpdateWithoutMoviesInput = {
-    public_id?: StringFieldUpdateOperationsInput | string
-    secure_url?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type ImageUncheckedUpdateWithoutMoviesInput = {
-    public_id?: StringFieldUpdateOperationsInput | string
-    secure_url?: StringFieldUpdateOperationsInput | string
   }
 
   export type GenresUpsertWithWhereUniqueWithoutMoviesInput = {
@@ -6633,9 +5344,10 @@ export namespace Prisma {
     title?: string | null
     year?: number | null
     score?: number | null
+    poster_image?: string | null
+    poster_image_id?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    poster_image: ImageCreateNestedOneWithoutMoviesInput
     User?: UserCreateNestedOneWithoutMoviesInput
   }
 
@@ -6644,10 +5356,11 @@ export namespace Prisma {
     title?: string | null
     year?: number | null
     score?: number | null
+    poster_image?: string | null
+    poster_image_id?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     userId?: string | null
-    imageId: string
   }
 
   export type MoviesCreateOrConnectWithoutGenresInput = {
@@ -6670,9 +5383,10 @@ export namespace Prisma {
     title?: NullableStringFieldUpdateOperationsInput | string | null
     year?: NullableIntFieldUpdateOperationsInput | number | null
     score?: NullableIntFieldUpdateOperationsInput | number | null
+    poster_image?: NullableStringFieldUpdateOperationsInput | string | null
+    poster_image_id?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    poster_image?: ImageUpdateOneRequiredWithoutMoviesNestedInput
     User?: UserUpdateOneWithoutMoviesNestedInput
   }
 
@@ -6680,57 +5394,11 @@ export namespace Prisma {
     title?: NullableStringFieldUpdateOperationsInput | string | null
     year?: NullableIntFieldUpdateOperationsInput | number | null
     score?: NullableIntFieldUpdateOperationsInput | number | null
+    poster_image?: NullableStringFieldUpdateOperationsInput | string | null
+    poster_image_id?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
-    imageId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type MoviesCreateWithoutPoster_imageInput = {
-    id?: string
-    title?: string | null
-    year?: number | null
-    score?: number | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    genres?: GenresCreateNestedManyWithoutMoviesInput
-    User?: UserCreateNestedOneWithoutMoviesInput
-  }
-
-  export type MoviesUncheckedCreateWithoutPoster_imageInput = {
-    id?: string
-    title?: string | null
-    year?: number | null
-    score?: number | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    userId?: string | null
-    genres?: GenresUncheckedCreateNestedManyWithoutMoviesInput
-  }
-
-  export type MoviesCreateOrConnectWithoutPoster_imageInput = {
-    where: MoviesWhereUniqueInput
-    create: XOR<MoviesCreateWithoutPoster_imageInput, MoviesUncheckedCreateWithoutPoster_imageInput>
-  }
-
-  export type MoviesCreateManyPoster_imageInputEnvelope = {
-    data: MoviesCreateManyPoster_imageInput | MoviesCreateManyPoster_imageInput[]
-  }
-
-  export type MoviesUpsertWithWhereUniqueWithoutPoster_imageInput = {
-    where: MoviesWhereUniqueInput
-    update: XOR<MoviesUpdateWithoutPoster_imageInput, MoviesUncheckedUpdateWithoutPoster_imageInput>
-    create: XOR<MoviesCreateWithoutPoster_imageInput, MoviesUncheckedCreateWithoutPoster_imageInput>
-  }
-
-  export type MoviesUpdateWithWhereUniqueWithoutPoster_imageInput = {
-    where: MoviesWhereUniqueInput
-    data: XOR<MoviesUpdateWithoutPoster_imageInput, MoviesUncheckedUpdateWithoutPoster_imageInput>
-  }
-
-  export type MoviesUpdateManyWithWhereWithoutPoster_imageInput = {
-    where: MoviesScalarWhereInput
-    data: XOR<MoviesUpdateManyMutationInput, MoviesUncheckedUpdateManyWithoutPoster_imageInput>
   }
 
   export type MoviesCreateManyUserInput = {
@@ -6738,18 +5406,20 @@ export namespace Prisma {
     title?: string | null
     year?: number | null
     score?: number | null
+    poster_image?: string | null
+    poster_image_id?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    imageId: string
   }
 
   export type MoviesUpdateWithoutUserInput = {
     title?: NullableStringFieldUpdateOperationsInput | string | null
     year?: NullableIntFieldUpdateOperationsInput | number | null
     score?: NullableIntFieldUpdateOperationsInput | number | null
+    poster_image?: NullableStringFieldUpdateOperationsInput | string | null
+    poster_image_id?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    poster_image?: ImageUpdateOneRequiredWithoutMoviesNestedInput
     genres?: GenresUpdateManyWithoutMoviesNestedInput
   }
 
@@ -6757,9 +5427,10 @@ export namespace Prisma {
     title?: NullableStringFieldUpdateOperationsInput | string | null
     year?: NullableIntFieldUpdateOperationsInput | number | null
     score?: NullableIntFieldUpdateOperationsInput | number | null
+    poster_image?: NullableStringFieldUpdateOperationsInput | string | null
+    poster_image_id?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    imageId?: StringFieldUpdateOperationsInput | string
     genres?: GenresUncheckedUpdateManyWithoutMoviesNestedInput
   }
 
@@ -6767,9 +5438,10 @@ export namespace Prisma {
     title?: NullableStringFieldUpdateOperationsInput | string | null
     year?: NullableIntFieldUpdateOperationsInput | number | null
     score?: NullableIntFieldUpdateOperationsInput | number | null
+    poster_image?: NullableStringFieldUpdateOperationsInput | string | null
+    poster_image_id?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    imageId?: StringFieldUpdateOperationsInput | string
   }
 
   export type GenresCreateManyMoviesInput = {
@@ -6797,45 +5469,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type MoviesCreateManyPoster_imageInput = {
-    id?: string
-    title?: string | null
-    year?: number | null
-    score?: number | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    userId?: string | null
-  }
-
-  export type MoviesUpdateWithoutPoster_imageInput = {
-    title?: NullableStringFieldUpdateOperationsInput | string | null
-    year?: NullableIntFieldUpdateOperationsInput | number | null
-    score?: NullableIntFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    genres?: GenresUpdateManyWithoutMoviesNestedInput
-    User?: UserUpdateOneWithoutMoviesNestedInput
-  }
-
-  export type MoviesUncheckedUpdateWithoutPoster_imageInput = {
-    title?: NullableStringFieldUpdateOperationsInput | string | null
-    year?: NullableIntFieldUpdateOperationsInput | number | null
-    score?: NullableIntFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
-    genres?: GenresUncheckedUpdateManyWithoutMoviesNestedInput
-  }
-
-  export type MoviesUncheckedUpdateManyWithoutPoster_imageInput = {
-    title?: NullableStringFieldUpdateOperationsInput | string | null
-    year?: NullableIntFieldUpdateOperationsInput | number | null
-    score?: NullableIntFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
 
 
   /**
@@ -6853,10 +5486,6 @@ export namespace Prisma {
      * @deprecated Use GenresDefaultArgs instead
      */
     export type GenresArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = GenresDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use ImageDefaultArgs instead
-     */
-    export type ImageArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = ImageDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

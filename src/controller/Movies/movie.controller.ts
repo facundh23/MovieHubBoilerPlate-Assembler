@@ -3,57 +3,53 @@ import { Request, Response } from "express";
 import { prismaClient } from "../../db/clientPrisma";
 import { uploadImage } from "../../utils/cloudinary";
 import fs from "fs-extra";
-import { convertType } from "../../utils/convertData";
+import { convertType, convertVariableType } from "../../utils/convertData";
 
-export const newMovie = async (
+export const createMovie = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  const { title, genres } = req.body;
+  const { title } = req.body;
   const { userId } = req.params;
-
-  let secure_url_image = "";
-  let public_id_image = "";
   let { year } = req.body;
+  let { score } = req.body;
+  let { genres } = req.body;
+
   if (typeof year === "string") {
     year = parseInt(year);
   }
-
-  let { score } = req.body;
   if (typeof score === "string") {
     score = parseInt(score);
   }
 
+  let arrGenres;
+  if (typeof genres === "string") {
+    arrGenres = genres.split(",");
+  }
+  console.log(arrGenres);
+  console.log(req.body);
   if (!req.files || !req.files.poster_image) {
     return res.status(400).send("Image is required");
   }
 
-  try {
-    const image = req.files?.poster_image;
-    if (image) {
-      if ("tempFilePath" in image) {
-        try {
-          const poster_image = await uploadImage(image.tempFilePath);
-          secure_url_image = poster_image.secure_url;
-          public_id_image = poster_image.public_id;
-          await fs.unlink(image?.tempFilePath);
-        } catch (error) {
-          return res.status(500).json({ error: "Upload error" });
-        }
-      }
+  const image = req.files?.poster_image;
+  let dbImage = null;
+
+  if (image) {
+    if ("tempFilePath" in image) {
+      dbImage = await uploadImage(image.tempFilePath);
+      await fs.unlink(image?.tempFilePath);
     }
+  }
+  try {
     const newMovie = await prismaClient.movies.create({
       data: {
         title,
-        poster_image: {
-          create: {
-            public_id: public_id_image,
-            secure_url: secure_url_image,
-          },
-        },
+        poster_image: dbImage?.secure_url,
+        poster_image_id: dbImage?.public_id,
         year,
         genres: {
-          connect: genres.map((genre: string) => ({ id: genre })),
+          connect: arrGenres?.map((genreId: string) => ({ id: genreId })),
         },
         score,
         User: {
@@ -65,9 +61,6 @@ export const newMovie = async (
       include: {
         genres: {
           select: { name: true },
-        },
-        poster_image: {
-          select: { secure_url: true },
         },
       },
     });
@@ -121,7 +114,7 @@ export const updateMovie = async (
   res: Response
 ): Promise<Response> => {
   const { movieId } = req.params;
-  const { title } = req.body;
+  const { title, genres, score, year, poster_image } = req.body;
 
   try {
     const updatedMovie = await prismaClient.movies.update({
@@ -130,6 +123,10 @@ export const updateMovie = async (
       },
       data: {
         title,
+        genres,
+        score,
+        year,
+        poster_image,
       },
     });
     return res.status(200).send(updatedMovie);
@@ -153,16 +150,6 @@ export const deleteMovieById = async (
     return res
       .status(200)
       .send({ msg: "Movie deleted Protected Route", data: movieId });
-  } catch (error) {
-    return res.status(500).send(error);
-  }
-};
-export const publicMovies = async (
-  req: Request,
-  res: Response
-): Promise<Response> => {
-  try {
-    return res.status(200).send({ msg: "Public request movies" });
   } catch (error) {
     return res.status(500).send(error);
   }
