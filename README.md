@@ -22,7 +22,7 @@
  2) ```npm install```
  3) ```npm run dev```
     
-## TAIWLINDCSS
+## TAILWLINDCSS
 1) Install in your project
 npm install -D tailwindcss postcss autoprefixer
 
