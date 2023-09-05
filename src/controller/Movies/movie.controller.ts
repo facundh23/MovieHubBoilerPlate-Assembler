@@ -111,11 +111,6 @@ export const updateMovie = async (
 ): Promise<Response> => {
   const { movieId } = req.params;
   const { title, score, year } = req.body;
-  let { genres } = req.body;
-  let arrGenres;
-  if (typeof genres === "string") {
-    arrGenres = genres.split(",");
-  }
 
   try {
     const updatedMovie = await prismaClient.movies.updateMany({
@@ -126,9 +121,6 @@ export const updateMovie = async (
         title,
         score: Number(score),
         year: Number(year),
-        genres: {
-          connect: arrGenres?.map((genreId: string) => ({ id: genreId })),
-        },
       },
     });
     return res.status(200).json(updatedMovie);
