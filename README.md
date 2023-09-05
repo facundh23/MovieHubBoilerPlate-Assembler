@@ -78,6 +78,8 @@ layers to your ./src/index.css file.
 ## Home :arrow_right:  ![image](https://github.com/facundh23/movieHubFront-Assembler/assets/90207514/bbb01837-7dca-420b-a31b-f7593f97cf74)
 ## EditPage :arrow_right:  ![image](https://github.com/facundh23/movieHubFront-Assembler/assets/90207514/80c66081-133d-4eec-841c-23ca41096745)
 ## DetaiPage :arrow_right:  ![image](https://github.com/facundh23/movieHubFront-Assembler/assets/90207514/0ab10a32-347a-43d4-bee1-5ecd88d8b3b5)
+## Responsive :arrow_right: ![image](https://github.com/facundh23/movieHubFront-Assembler/assets/90207514/f3eba023-0378-4c63-9f7d-a590b2e2f3cd)
+
 
 
 
