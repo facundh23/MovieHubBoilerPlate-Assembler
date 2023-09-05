@@ -26,8 +26,7 @@ export const createMovie = async (
   if (typeof genres === "string") {
     arrGenres = genres.split(",");
   }
-  console.log(arrGenres);
-  console.log(req.body);
+
   if (!req.files || !req.files.poster_image) {
     return res.status(400).send("Image is required");
   }
@@ -99,9 +98,6 @@ export const getMovieById = async (
       where: {
         id: convertType(movieId),
       },
-      include: {
-        genres: true,
-      },
     });
     return res.status(201).json(genreMovie);
   } catch (error) {
@@ -114,22 +110,20 @@ export const updateMovie = async (
   res: Response
 ): Promise<Response> => {
   const { movieId } = req.params;
-  const { title, genres, score, year, poster_image } = req.body;
+  const { title, score, year } = req.body;
 
   try {
-    const updatedMovie = await prismaClient.movies.update({
+    const updatedMovie = await prismaClient.movies.updateMany({
       where: {
         id: convertType(movieId),
       },
       data: {
         title,
-        genres,
-        score,
-        year,
-        poster_image,
+        score: Number(score),
+        year: Number(year),
       },
     });
-    return res.status(200).send(updatedMovie);
+    return res.status(200).json(updatedMovie);
   } catch (error) {
     return res.status(500).json(error);
   }
