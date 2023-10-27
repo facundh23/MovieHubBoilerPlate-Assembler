@@ -1,4 +1,4 @@
-import { DATA_SOURCE, mongoClient, postgresClient } from "../db/clientPrisma";
+import { DATA_SOURCE } from "../db/clientPrisma";
 export const convertType = (id: string) => {
   if (DATA_SOURCE === "postgresql") {
     return Number(id);

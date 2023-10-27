@@ -2128,6 +2128,7 @@ export namespace Prisma {
     title: string | null
     year: number | null
     score: number | null
+    siopnsis: string | null
     poster_image: string | null
     poster_image_id: string | null
     createdAt: Date | null
@@ -2141,6 +2142,7 @@ export namespace Prisma {
     title: string | null
     year: number | null
     score: number | null
+    siopnsis: string | null
     poster_image: string | null
     poster_image_id: string | null
     createdAt: Date | null
@@ -2154,6 +2156,7 @@ export namespace Prisma {
     title: number
     year: number
     score: number
+    siopnsis: number
     poster_image: number
     poster_image_id: number
     createdAt: number
@@ -2185,6 +2188,7 @@ export namespace Prisma {
     title?: true
     year?: true
     score?: true
+    siopnsis?: true
     poster_image?: true
     poster_image_id?: true
     createdAt?: true
@@ -2198,6 +2202,7 @@ export namespace Prisma {
     title?: true
     year?: true
     score?: true
+    siopnsis?: true
     poster_image?: true
     poster_image_id?: true
     createdAt?: true
@@ -2211,6 +2216,7 @@ export namespace Prisma {
     title?: true
     year?: true
     score?: true
+    siopnsis?: true
     poster_image?: true
     poster_image_id?: true
     createdAt?: true
@@ -2311,6 +2317,7 @@ export namespace Prisma {
     title: string | null
     year: number | null
     score: number | null
+    siopnsis: string | null
     poster_image: string
     poster_image_id: string
     createdAt: Date
@@ -2343,6 +2350,7 @@ export namespace Prisma {
     title?: boolean
     year?: boolean
     score?: boolean
+    siopnsis?: boolean
     poster_image?: boolean
     poster_image_id?: boolean
     createdAt?: boolean
@@ -2359,6 +2367,7 @@ export namespace Prisma {
     title?: boolean
     year?: boolean
     score?: boolean
+    siopnsis?: boolean
     poster_image?: boolean
     poster_image_id?: boolean
     createdAt?: boolean
@@ -2385,6 +2394,7 @@ export namespace Prisma {
       title: string | null
       year: number | null
       score: number | null
+      siopnsis: string | null
       poster_image: string
       poster_image_id: string
       createdAt: Date
@@ -2792,6 +2802,7 @@ export namespace Prisma {
     readonly title: FieldRef<"Movies", 'String'>
     readonly year: FieldRef<"Movies", 'Int'>
     readonly score: FieldRef<"Movies", 'Int'>
+    readonly siopnsis: FieldRef<"Movies", 'String'>
     readonly poster_image: FieldRef<"Movies", 'String'>
     readonly poster_image_id: FieldRef<"Movies", 'String'>
     readonly createdAt: FieldRef<"Movies", 'DateTime'>
@@ -4171,6 +4182,7 @@ export namespace Prisma {
     title: 'title',
     year: 'year',
     score: 'score',
+    siopnsis: 'siopnsis',
     poster_image: 'poster_image',
     poster_image_id: 'poster_image_id',
     createdAt: 'createdAt',
@@ -4346,6 +4358,7 @@ export namespace Prisma {
     title?: StringNullableFilter<"Movies"> | string | null
     year?: IntNullableFilter<"Movies"> | number | null
     score?: IntNullableFilter<"Movies"> | number | null
+    siopnsis?: StringNullableFilter<"Movies"> | string | null
     poster_image?: StringFilter<"Movies"> | string
     poster_image_id?: StringFilter<"Movies"> | string
     createdAt?: DateTimeFilter<"Movies"> | Date | string
@@ -4361,6 +4374,7 @@ export namespace Prisma {
     title?: SortOrderInput | SortOrder
     year?: SortOrderInput | SortOrder
     score?: SortOrderInput | SortOrder
+    siopnsis?: SortOrderInput | SortOrder
     poster_image?: SortOrder
     poster_image_id?: SortOrder
     createdAt?: SortOrder
@@ -4379,6 +4393,7 @@ export namespace Prisma {
     title?: StringNullableFilter<"Movies"> | string | null
     year?: IntNullableFilter<"Movies"> | number | null
     score?: IntNullableFilter<"Movies"> | number | null
+    siopnsis?: StringNullableFilter<"Movies"> | string | null
     poster_image?: StringFilter<"Movies"> | string
     poster_image_id?: StringFilter<"Movies"> | string
     createdAt?: DateTimeFilter<"Movies"> | Date | string
@@ -4394,6 +4409,7 @@ export namespace Prisma {
     title?: SortOrderInput | SortOrder
     year?: SortOrderInput | SortOrder
     score?: SortOrderInput | SortOrder
+    siopnsis?: SortOrderInput | SortOrder
     poster_image?: SortOrder
     poster_image_id?: SortOrder
     createdAt?: SortOrder
@@ -4415,6 +4431,7 @@ export namespace Prisma {
     title?: StringNullableWithAggregatesFilter<"Movies"> | string | null
     year?: IntNullableWithAggregatesFilter<"Movies"> | number | null
     score?: IntNullableWithAggregatesFilter<"Movies"> | number | null
+    siopnsis?: StringNullableWithAggregatesFilter<"Movies"> | string | null
     poster_image?: StringWithAggregatesFilter<"Movies"> | string
     poster_image_id?: StringWithAggregatesFilter<"Movies"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Movies"> | Date | string
@@ -4541,6 +4558,7 @@ export namespace Prisma {
     title?: string | null
     year?: number | null
     score?: number | null
+    siopnsis?: string | null
     poster_image: string
     poster_image_id: string
     createdAt?: Date | string
@@ -4555,6 +4573,7 @@ export namespace Prisma {
     title?: string | null
     year?: number | null
     score?: number | null
+    siopnsis?: string | null
     poster_image: string
     poster_image_id: string
     createdAt?: Date | string
@@ -4568,6 +4587,7 @@ export namespace Prisma {
     title?: NullableStringFieldUpdateOperationsInput | string | null
     year?: NullableIntFieldUpdateOperationsInput | number | null
     score?: NullableIntFieldUpdateOperationsInput | number | null
+    siopnsis?: NullableStringFieldUpdateOperationsInput | string | null
     poster_image?: StringFieldUpdateOperationsInput | string
     poster_image_id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -4582,6 +4602,7 @@ export namespace Prisma {
     title?: NullableStringFieldUpdateOperationsInput | string | null
     year?: NullableIntFieldUpdateOperationsInput | number | null
     score?: NullableIntFieldUpdateOperationsInput | number | null
+    siopnsis?: NullableStringFieldUpdateOperationsInput | string | null
     poster_image?: StringFieldUpdateOperationsInput | string
     poster_image_id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -4596,6 +4617,7 @@ export namespace Prisma {
     title?: string | null
     year?: number | null
     score?: number | null
+    siopnsis?: string | null
     poster_image: string
     poster_image_id: string
     createdAt?: Date | string
@@ -4608,6 +4630,7 @@ export namespace Prisma {
     title?: NullableStringFieldUpdateOperationsInput | string | null
     year?: NullableIntFieldUpdateOperationsInput | number | null
     score?: NullableIntFieldUpdateOperationsInput | number | null
+    siopnsis?: NullableStringFieldUpdateOperationsInput | string | null
     poster_image?: StringFieldUpdateOperationsInput | string
     poster_image_id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -4620,6 +4643,7 @@ export namespace Prisma {
     title?: NullableStringFieldUpdateOperationsInput | string | null
     year?: NullableIntFieldUpdateOperationsInput | number | null
     score?: NullableIntFieldUpdateOperationsInput | number | null
+    siopnsis?: NullableStringFieldUpdateOperationsInput | string | null
     poster_image?: StringFieldUpdateOperationsInput | string
     poster_image_id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -4881,6 +4905,7 @@ export namespace Prisma {
     title?: SortOrder
     year?: SortOrder
     score?: SortOrder
+    siopnsis?: SortOrder
     poster_image?: SortOrder
     poster_image_id?: SortOrder
     createdAt?: SortOrder
@@ -4902,6 +4927,7 @@ export namespace Prisma {
     title?: SortOrder
     year?: SortOrder
     score?: SortOrder
+    siopnsis?: SortOrder
     poster_image?: SortOrder
     poster_image_id?: SortOrder
     createdAt?: SortOrder
@@ -4915,6 +4941,7 @@ export namespace Prisma {
     title?: SortOrder
     year?: SortOrder
     score?: SortOrder
+    siopnsis?: SortOrder
     poster_image?: SortOrder
     poster_image_id?: SortOrder
     createdAt?: SortOrder
@@ -5310,6 +5337,7 @@ export namespace Prisma {
     title?: string | null
     year?: number | null
     score?: number | null
+    siopnsis?: string | null
     poster_image: string
     poster_image_id: string
     createdAt?: Date | string
@@ -5323,6 +5351,7 @@ export namespace Prisma {
     title?: string | null
     year?: number | null
     score?: number | null
+    siopnsis?: string | null
     poster_image: string
     poster_image_id: string
     createdAt?: Date | string
@@ -5365,6 +5394,7 @@ export namespace Prisma {
     title?: StringNullableFilter<"Movies"> | string | null
     year?: IntNullableFilter<"Movies"> | number | null
     score?: IntNullableFilter<"Movies"> | number | null
+    siopnsis?: StringNullableFilter<"Movies"> | string | null
     poster_image?: StringFilter<"Movies"> | string
     poster_image_id?: StringFilter<"Movies"> | string
     createdAt?: DateTimeFilter<"Movies"> | Date | string
@@ -5470,6 +5500,7 @@ export namespace Prisma {
     title?: string | null
     year?: number | null
     score?: number | null
+    siopnsis?: string | null
     poster_image: string
     poster_image_id: string
     createdAt?: Date | string
@@ -5483,6 +5514,7 @@ export namespace Prisma {
     title?: string | null
     year?: number | null
     score?: number | null
+    siopnsis?: string | null
     poster_image: string
     poster_image_id: string
     createdAt?: Date | string
@@ -5517,6 +5549,7 @@ export namespace Prisma {
     title?: string | null
     year?: number | null
     score?: number | null
+    siopnsis?: string | null
     poster_image: string
     poster_image_id: string
     createdAt?: Date | string
@@ -5528,6 +5561,7 @@ export namespace Prisma {
     title?: NullableStringFieldUpdateOperationsInput | string | null
     year?: NullableIntFieldUpdateOperationsInput | number | null
     score?: NullableIntFieldUpdateOperationsInput | number | null
+    siopnsis?: NullableStringFieldUpdateOperationsInput | string | null
     poster_image?: StringFieldUpdateOperationsInput | string
     poster_image_id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -5541,6 +5575,7 @@ export namespace Prisma {
     title?: NullableStringFieldUpdateOperationsInput | string | null
     year?: NullableIntFieldUpdateOperationsInput | number | null
     score?: NullableIntFieldUpdateOperationsInput | number | null
+    siopnsis?: NullableStringFieldUpdateOperationsInput | string | null
     poster_image?: StringFieldUpdateOperationsInput | string
     poster_image_id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -5554,6 +5589,7 @@ export namespace Prisma {
     title?: NullableStringFieldUpdateOperationsInput | string | null
     year?: NullableIntFieldUpdateOperationsInput | number | null
     score?: NullableIntFieldUpdateOperationsInput | number | null
+    siopnsis?: NullableStringFieldUpdateOperationsInput | string | null
     poster_image?: StringFieldUpdateOperationsInput | string
     poster_image_id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -5588,6 +5624,7 @@ export namespace Prisma {
     title?: NullableStringFieldUpdateOperationsInput | string | null
     year?: NullableIntFieldUpdateOperationsInput | number | null
     score?: NullableIntFieldUpdateOperationsInput | number | null
+    siopnsis?: NullableStringFieldUpdateOperationsInput | string | null
     poster_image?: StringFieldUpdateOperationsInput | string
     poster_image_id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -5601,6 +5638,7 @@ export namespace Prisma {
     title?: NullableStringFieldUpdateOperationsInput | string | null
     year?: NullableIntFieldUpdateOperationsInput | number | null
     score?: NullableIntFieldUpdateOperationsInput | number | null
+    siopnsis?: NullableStringFieldUpdateOperationsInput | string | null
     poster_image?: StringFieldUpdateOperationsInput | string
     poster_image_id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -5614,6 +5652,7 @@ export namespace Prisma {
     title?: NullableStringFieldUpdateOperationsInput | string | null
     year?: NullableIntFieldUpdateOperationsInput | number | null
     score?: NullableIntFieldUpdateOperationsInput | number | null
+    siopnsis?: NullableStringFieldUpdateOperationsInput | string | null
     poster_image?: StringFieldUpdateOperationsInput | string
     poster_image_id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

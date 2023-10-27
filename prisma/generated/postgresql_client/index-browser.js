@@ -134,6 +134,7 @@ exports.Prisma.MoviesScalarFieldEnum = {
   title: 'title',
   year: 'year',
   score: 'score',
+  siopnsis: 'siopnsis',
   poster_image: 'poster_image',
   poster_image_id: 'poster_image_id',
   createdAt: 'createdAt',

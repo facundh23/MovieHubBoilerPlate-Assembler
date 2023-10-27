@@ -1,6 +1,5 @@
 import { Response, Request } from "express";
 import { prismaClient } from "../../db/clientPrisma";
-import { convertType } from "../../utils/convertData";
 
 export const signUp = async (req: Request, res: Response): Promise<void> => {
   const { name, email } = req.body;
@@ -63,7 +62,7 @@ export const getUserById = async (
   try {
     const user = await prismaClient.user.findUnique({
       where: {
-        email: userId,
+        id: userId,
       },
       include: {
         movies: {
@@ -85,17 +84,16 @@ export const updateUser = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  const { userId } = req.params;
-  const { name, email } = req.body;
+  const { name } = req.body;
+  const { email } = req.params;
 
   try {
     const updatedUser = await prismaClient.user.update({
       where: {
-        id: userId,
+        email: email,
       },
       data: {
         name,
-        email,
       },
     });
     return res.status(200).send(updatedUser);
@@ -111,7 +109,7 @@ export const deleteUser = async (
   try {
     await prismaClient.user.delete({
       where: {
-        id: convertType(userId),
+        id: userId,
       },
     });
     return res.status(204).json();

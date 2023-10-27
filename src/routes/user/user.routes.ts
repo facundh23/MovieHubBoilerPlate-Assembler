@@ -13,7 +13,7 @@ const userRoutes: Router = Router();
 userRoutes
   .get("/", getAllUsers)
   .get("/:userId", getUserById)
-  .put("/:userId", checkJwtMiddleware, updateUser)
+  .put("/:email", updateUser)
   .delete("/:userId", checkJwtMiddleware, deleteUser)
   .post("/", signUp);
 

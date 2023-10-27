@@ -14,8 +14,8 @@ moviesRoutes
 
   .get("/", getAllMovies)
   .get("/movies/movie/:movieId", getMovieById)
-  .post("/movies/:userId", checkJwtMiddleware, createMovie)
-  .delete("/movies/:movieId", checkJwtMiddleware, deleteMovieById)
+  .post("/movies/:userID", createMovie)
+  .delete("/movies/:movieId", deleteMovieById)
   .put("/movies/edit/:movieId", updateMovie);
 
 export default moviesRoutes;

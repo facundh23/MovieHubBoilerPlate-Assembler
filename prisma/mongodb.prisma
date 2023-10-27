@@ -25,6 +25,7 @@ model Movies {
   title           String?
   year            Int?
   score           Int?
+  sinopsis        String?
   poster_image    String?
   poster_image_id String?
   genres          Genres[]

@@ -3,14 +3,13 @@ import { Request, Response } from "express";
 import { prismaClient } from "../../db/clientPrisma";
 import { uploadImage } from "../../utils/cloudinary";
 import fs from "fs-extra";
-import { convertType, convertVariableType } from "../../utils/convertData";
 
 export const createMovie = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  const { title } = req.body;
-  const { userId } = req.params;
+  const { title, sinopsis } = req.body;
+  const { userID } = req.params;
   let { year } = req.body;
   let { score } = req.body;
   let { genres } = req.body;
@@ -47,13 +46,14 @@ export const createMovie = async (
         poster_image: dbImage?.secure_url,
         poster_image_id: dbImage?.public_id,
         year,
+        sinopsis,
         genres: {
           connect: arrGenres?.map((genreId: string) => ({ id: genreId })),
         },
         score,
         User: {
           connect: {
-            id: userId,
+            email: userID,
           },
         },
       },
@@ -96,7 +96,7 @@ export const getMovieById = async (
   try {
     const genreMovie = await prismaClient.movies.findUnique({
       where: {
-        id: convertType(movieId),
+        id: movieId,
       },
     });
     return res.status(201).json(genreMovie);
@@ -110,15 +110,16 @@ export const updateMovie = async (
   res: Response
 ): Promise<Response> => {
   const { movieId } = req.params;
-  const { title, score, year } = req.body;
+  const { title, score, year, sinopsis } = req.body;
 
   try {
     const updatedMovie = await prismaClient.movies.updateMany({
       where: {
-        id: convertType(movieId),
+        id: movieId,
       },
       data: {
         title,
+        sinopsis,
         score: Number(score),
         year: Number(year),
       },
@@ -138,7 +139,7 @@ export const deleteMovieById = async (
   try {
     await prismaClient.movies.delete({
       where: {
-        id: convertType(movieId),
+        id: movieId,
       },
     });
     return res

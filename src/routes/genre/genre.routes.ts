@@ -11,8 +11,8 @@ const genreRoutes: Router = Router();
 
 genreRoutes
   .get("/", showGenres)
-  .post("/", checkJwtMiddleware, addGenre)
-  .post("/generatorGenre", checkJwtMiddleware, generatorGenre)
-  .delete("/:genreId", checkJwtMiddleware, deleteGenreById);
+  .post("/", addGenre)
+  .post("/generatorGenre", generatorGenre)
+  .delete("/:genreId", deleteGenreById);
 
 export default genreRoutes;

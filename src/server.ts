@@ -1,4 +1,4 @@
-import express, { Application } from "express";
+import express, { Application, Request, Response } from "express";
 import morgan from "morgan";
 import userRoutes from "./routes/user/user.routes";
 import cors from "cors";
@@ -31,5 +31,7 @@ app.use("/", authRoutes);
 app.use("/users", userRoutes);
 app.use("/home", moviesRoutes);
 app.use("/genres", genreRoutes);
-
+app.get("/", (req: Request, res: Response) => {
+  res.status(200).json({ message: "Welcome to the API World" });
+});
 export default app;
